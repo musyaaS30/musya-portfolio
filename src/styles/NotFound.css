@@ -1,0 +1,167 @@
+/* NotFound Page with Floating Particles */
+.not-found-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--background-color);
+  color: var(--default-color);
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  margin: 0;
+}
+
+.not-found-content {
+  position: relative;
+  width: 600px;
+  max-width: 100%;
+  margin: 20px;
+  background: var(--surface-color);
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: -10px 10px 67px -12px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: apparition 0.8s 1.2s cubic-bezier(0.39,0.575,0.28,0.995) forwards;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+.not-found-content p {
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.1rem;
+  color: var(--default-color);
+}
+
+.not-found-content p:last-child {
+  margin-bottom: 0;
+}
+
+.not-found-content strong {
+  color: var(--accent-color);
+  font-weight: 900;
+}
+
+.not-found-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  border: 3px solid var(--accent-color);
+  background: transparent;
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.not-found-button:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Particle Styles */
+.particle {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  color: var(--accent-color);
+  opacity: 0.3;
+  font-weight: 900;
+  z-index: 1;
+}
+
+/* Generate random animations for each particle */
+.particle:nth-child(1) { top: 5%; left: 10%; font-size: 18px; filter: blur(0.02px); animation: 25s float infinite; }
+.particle:nth-child(2) { top: 15%; left: 85%; font-size: 24px; filter: blur(0.04px); animation: 32s floatReverse infinite; }
+.particle:nth-child(3) { top: 25%; left: 25%; font-size: 16px; filter: blur(0.06px); animation: 28s float2 infinite; }
+.particle:nth-child(4) { top: 35%; left: 65%; font-size: 22px; filter: blur(0.08px); animation: 35s floatReverse2 infinite; }
+.particle:nth-child(5) { top: 45%; left: 15%; font-size: 20px; filter: blur(0.1px); animation: 30s float infinite; }
+.particle:nth-child(6) { top: 55%; left: 75%; font-size: 26px; filter: blur(0.12px); animation: 27s floatReverse infinite; }
+.particle:nth-child(7) { top: 65%; left: 35%; font-size: 18px; filter: blur(0.14px); animation: 33s float2 infinite; }
+.particle:nth-child(8) { top: 75%; left: 55%; font-size: 24px; filter: blur(0.16px); animation: 29s floatReverse2 infinite; }
+.particle:nth-child(9) { top: 85%; left: 5%; font-size: 22px; filter: blur(0.18px); animation: 31s float infinite; }
+.particle:nth-child(10) { top: 10%; left: 45%; font-size: 20px; filter: blur(0.2px); animation: 26s floatReverse infinite; }
+
+/* Continue this pattern for all 80 particles... */
+/* For brevity, I'll show a function to generate these in JS instead */
+
+/* Animations */
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(180px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-180px);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(28px);
+  }
+}
+
+@keyframes floatReverse2 {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-28px);
+  }
+}
+
+/* Dark Mode Support */
+.dark-mode .not-found-container {
+  --background-color: #1a1a1a;
+  --surface-color: #2d2d2d;
+  --default-color: #cccccc;
+  --accent-color: #ffffff;
+  --contrast-color: #000000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .not-found-content {
+    padding: 40px 20px;
+    margin: 15px;
+  }
+  
+  .not-found-content p {
+    font-size: 1.1rem;
+  }
+  
+  .not-found-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+}

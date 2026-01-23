@@ -1,0 +1,213 @@
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root { 
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #555555; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #333333; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #000000; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+:root {
+  --nav-color: #555555;  /* The default color of the main navmenu links */
+  --nav-hover-color: #000000; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #fafafa; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #8f8f8f; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #000000; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+.light-background {
+  --background-color: #fafafa;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
+}
+
+.skillIcon {
+  background-color: var(--background-color);
+  height: 90vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.skillIcon {
+  position: relative;
+  background-color: var(--background-color);
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-family: sans-serif; */
+}
+
+.skillIcon h1 {
+  position: absolute;
+  top: 50%;              /* posisi tengah vertical */
+  left: 50%;             /* posisi tengah horizontal */
+  transform: translate(-50%, -50%); /* benar-benar center */
+  font-size: 56px;
+  /* font-weight: bold; */
+  /* color: #222; */
+  z-index: 9999;         /* paling depan */
+  text-align: center;
+}
+
+
+#container {
+  position: relative;
+  /* margin-top: -20rem; */
+  width: 100%;
+  height: 100%;
+}
+
+.floating-image {
+  position: absolute;
+  width: 80px;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease-in-out;
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.floating-image:hover {
+  filter: grayscale(0%);
+  transform: scale(1.2);
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  padding: 6px 10px;
+  background: var(--accent-color);
+  color: var(--background-color);
+  border-radius: 6px;
+  font-size: 13px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -100%);
+  text-align: start;
+  line-height: 1.3em;
+  max-width: 200px;
+}
+
+/* === MOBILE LAYOUT FIX === */
+@media (max-width: 480px) {
+
+  .tooltip {
+    display: none !important;
+  }
+
+  .skillIcon {
+    height: auto;
+    padding: 3rem 0 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .skillIcon h1 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 24px;
+    margin-bottom: 2rem;
+    text-align: center;
+    z-index: 10;
+  }
+
+  #container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .floating-image {
+    position: static !important;
+    width: 45px;
+    transform: none !important;
+    filter: grayscale(0%);
+    cursor: pointer;
+  }
+
+  /* Tooltip tetap muncul normal */
+  .tooltip {
+    z-index: 9999;
+  }
+}
+
+/* === MODAL STYLES === */
+.skill-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 1rem;
+}
+
+.skill-modal {
+  background: #ffffff;
+  color: #222;
+  border-radius: 14px;
+  padding: 1.3rem 1.6rem;
+  max-width: 300px;
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.45rem;
+  box-shadow: 
+    0px 6px 14px rgba(0,0,0,0.18),
+    0px 2px 4px rgba(0,0,0,0.08);
+  animation: fadeIn .25s ease;
+}
+
+.skill-modal-close{
+  display: none;
+}
+
+.modal-img {
+  width: 65px;
+  margin: 0 auto 1rem;
+  display: block;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@media (min-width: 481px) {
+  /* Modal hanya aktif di mobile */
+  .skill-modal-overlay {
+    display: none !important;
+  }
+}

@@ -1,0 +1,40 @@
+/* dotGrid.css */
+.dot-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.dot-grid__wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.dot-grid__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Smooth transition for color changes */
+.dot-grid__canvas {
+  transition: opacity 0.3s ease;
+}
+
+/* Dark mode specific styles */
+@media (prefers-color-scheme: dark) {
+  .dot-grid {
+    --dot-grid-base-color: #1e1b4b;
+    --dot-grid-active-color: #818cf8;
+  }
+}
+
+body.dark-mode .dot-grid__canvas {
+  opacity: 0.9;
+}

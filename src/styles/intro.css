@@ -1,0 +1,176 @@
+/* Intro Page Styles */
+.intro-page {
+  height: 100vh;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--default-color);
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Typography */
+.intro-h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--default-color);
+}
+
+@media (min-width: 768px) {
+  .intro-h2 {
+    font-size: 2rem;
+  }
+}
+
+.intro-h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--heading-color);
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .intro-h1 {
+    font-size: 3.5rem;
+  }
+}
+
+.intro-p {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: var(--default-color);
+  max-width: 500px;
+}
+
+/* Cursor Animation */
+.cursor {
+  font-weight: 300;
+  animation: blink 1s steps(1) infinite;
+  color: var(--accent-color);
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--accent-color);
+  text-stroke: 1px var(--accent-color);
+}
+
+/* Input Styles */
+.intro-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--default-color);
+  outline: none;
+  color: var(--default-color);
+  font-size: 1.125rem;
+  padding: 0.75rem 0;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 2rem;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.intro-input:focus {
+  border-bottom-color: var(--accent-color);
+}
+
+.intro-input::placeholder {
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+}
+
+/* Button Styles */
+.intro-button {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+}
+
+.intro-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.intro-button:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.intro-button.hidden {
+  display: none;
+}
+
+/* Animation Classes */
+.animated-element {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+/* Dark Mode */
+.dark-mode .intro-page {
+  --background-color: #1a1a1a;
+  --default-color: #cccccc;
+  --heading-color: #ffffff;
+  --accent-color: #ffffff;
+  --contrast-color: #000000;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .intro-h1 {
+    font-size: 1.75rem;
+  }
+  
+  .intro-h2 {
+    font-size: 1.25rem;
+  }
+  
+  .intro-p {
+    font-size: 1rem;
+  }
+  
+  .intro-input {
+    font-size: 1rem;
+    max-width: 250px;
+  }
+  
+  .hero-container {
+    padding: 0 15px;
+  }
+}

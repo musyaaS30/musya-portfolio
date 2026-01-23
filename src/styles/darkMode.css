@@ -1,0 +1,76 @@
+/* Toggle Switch Container */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: fixed;
+  top: 1.8rem;
+  right: 4rem;
+  z-index: 9999;
+}
+
+
+:root {
+      --toggle-bg: #e5e7eb;
+      --toggle-bg-dark: #374151;
+    }
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  background: var(--toggle-bg);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+body.dark-mode .toggle-switch {
+  background: var(--toggle-bg-dark);
+}
+
+/* Toggle Slider */
+.toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .toggle-slider {
+  transform: translateX(28px);
+}
+
+.toggle-switch:hover .toggle-slider {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode State */
+.dark-mode {
+  --background-color: #0e0e0e;
+  --default-color: #dcdcdc;
+  --heading-color: #ffffff;
+  --accent-color: #00d084;
+  --surface-color: #1a1a1a;
+  --contrast-color: #ffffff;
+
+  /* Nav Colors */
+  --nav-color: #dcdcdc;
+  --nav-hover-color: #ffffff;
+  --nav-mobile-background-color: #111111;
+  --nav-dropdown-background-color: #1b1b1b;
+  --nav-dropdown-color: #bbbbbb;
+  --nav-dropdown-hover-color: #00d084;
+}
