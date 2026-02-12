@@ -35,10 +35,10 @@ const Home = () => {
         <Skills />
         <Resume />
         <Portfolio />
-        <Testimonials />
-        <Services />
+        {/* <Testimonials /> */}
+        {/* <Services /> */}
         <FAQ />
-        <Contact />
+        {/* <Contact /> */}
       </main>
       <Footer />
       <ScrollTop />

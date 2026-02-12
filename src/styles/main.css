@@ -6,19 +6,24 @@
 * License: https://bootstrapmade.com/license/
 */
 
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
 /*--------------------------------------------------------------
 # Font & Color Variables
 # Help: https://bootstrapmade.com/color-system/
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Quicksand",  sans-serif;
-  --nav-font: "Raleway",  sans-serif;
+  --default-font:"Raleway", sans-serif;
+    /* "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+  --heading-font: "Quicksand", sans-serif;
+  --nav-font: "Raleway", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+:root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #555555; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #333333; /* Color for headings, subheadings and title throughout the website */
@@ -29,7 +34,7 @@
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #555555;  /* The default color of the main navmenu links */
+  --nav-color: #555555; /* The default color of the main navmenu links */
   --nav-hover-color: #000000; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #fafafa; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
@@ -63,7 +68,7 @@
 body {
   color: var(--default-color);
   background-color: var(--background-color);
-  font-family: var(--default-font);
+  font-family: "Raleway", sans-serif;
 }
 
 a {
@@ -268,10 +273,11 @@ h6 {
   transition: all 0.5s ease-in-out;
 }
 
-.navmenu .dropdown>.dropdown-active {
+.navmenu .dropdown > .dropdown-active {
   display: block;
   background-color: var(--nav-dropdown-background-color);
-  border: 1px solid color-mix(in srgb, var(--nav-dropdown-color), transparent 90%);
+  border: 1px solid
+    color-mix(in srgb, var(--nav-dropdown-color), transparent 90%);
 }
 
 .mobile-nav-active {
@@ -349,7 +355,9 @@ h6 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
   opacity: 1;
   transform: scale(1);
   filter: blur(0);
@@ -361,8 +369,6 @@ h6 {
   filter: blur(6px);
   pointer-events: none;
 }
-
-
 
 #preloader .letters {
   display: flex;
@@ -384,15 +390,29 @@ h6 {
   animation: bounce 0.6s infinite alternate;
 }
 
-#preloader .letters div:nth-child(1) { animation-delay: 0s; }
-#preloader .letters div:nth-child(2) { animation-delay: 0.1s; }
-#preloader .letters div:nth-child(3) { animation-delay: 0.2s; }
-#preloader .letters div:nth-child(4) { animation-delay: 0.3s; }
-#preloader .letters div:nth-child(5) { animation-delay: 0.4s; }
+#preloader .letters div:nth-child(1) {
+  animation-delay: 0s;
+}
+#preloader .letters div:nth-child(2) {
+  animation-delay: 0.1s;
+}
+#preloader .letters div:nth-child(3) {
+  animation-delay: 0.2s;
+}
+#preloader .letters div:nth-child(4) {
+  animation-delay: 0.3s;
+}
+#preloader .letters div:nth-child(5) {
+  animation-delay: 0.4s;
+}
 
 @keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-10px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
 }
 
 #preloader .counter {
@@ -401,8 +421,6 @@ h6 {
   color: var(--accent-color);
   margin-top: 10px;
 }
-
-
 
 /*--------------------------------------------------------------
 # Scroll Top Button
@@ -528,7 +546,11 @@ h6 {
   margin-right: 0.2rem;
 }
 
-.page-title .breadcrumbs .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+.page-title
+  .breadcrumbs
+  .breadcrumb
+  .breadcrumb-item
+  + .breadcrumb-item::before {
   color: color-mix(in srgb, var(--default-color), transparent 50%);
 }
 
@@ -666,7 +688,8 @@ section,
 .hero .btn-ghost:focus {
   border-color: var(--accent-color);
   color: var(--accent-color);
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-color), transparent 90%);
+  box-shadow: 0 6px 20px
+    color-mix(in srgb, var(--accent-color), transparent 90%);
   outline: none;
 }
 
@@ -692,7 +715,9 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 40%);
   transform: scaleX(0.6);
   transform-origin: left;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    background 0.3s ease-in-out;
 }
 
 .hero .link-underline:hover,
@@ -721,14 +746,18 @@ section,
   height: auto;
   border-radius: 10px;
   display: block;
-  box-shadow: 0 20px 60px color-mix(in srgb, var(--default-color), transparent 90%);
+  box-shadow: 0 20px 60px
+    color-mix(in srgb, var(--default-color), transparent 90%);
   transform: translateZ(0);
-  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+  transition:
+    transform 0.4s ease-in-out,
+    box-shadow 0.4s ease-in-out;
 }
 
 .hero .portrait-wrap:hover .portrait-img {
   transform: scale(1.015);
-  box-shadow: 0 28px 80px color-mix(in srgb, var(--accent-color), transparent 90%);
+  box-shadow: 0 28px 80px
+    color-mix(in srgb, var(--accent-color), transparent 90%);
 }
 
 .hero .portrait-wrap .badge.note {
@@ -744,7 +773,8 @@ section,
   color: var(--default-color);
   font-size: 13px;
   backdrop-filter: blur(6px);
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color), transparent 88%);
+  box-shadow: 0 10px 30px
+    color-mix(in srgb, var(--accent-color), transparent 88%);
 }
 
 .hero .portrait-wrap .badge.note i {
@@ -797,7 +827,8 @@ section .hero {
   --space-3: 40px;
   --space-4: 64px;
   --radius-s: 6px;
-  --shadow-soft: 0 10px 30px color-mix(in srgb, var(--default-color), transparent 92%);
+  --shadow-soft: 0 10px 30px
+    color-mix(in srgb, var(--default-color), transparent 92%);
 }
 
 .about .container {
@@ -1114,7 +1145,8 @@ section .hero {
   transition-delay: 0.3s;
 }
 
-.about .text-step:nth-of-type(2) { /* Paragraph kedua */
+.about .text-step:nth-of-type(2) {
+  /* Paragraph kedua */
   transition-delay: 0.5s;
 }
 
@@ -1157,7 +1189,7 @@ section .hero {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
   border-radius: 5px;
@@ -1172,10 +1204,18 @@ section .hero {
   transform: translateY(20px);
 }
 
-.about .skills-wrap.visible .skill-item:nth-child(1) { animation-delay: 0.1s; }
-.about .skills-wrap.visible .skill-item:nth-child(2) { animation-delay: 0.2s; }
-.about .skills-wrap.visible .skill-item:nth-child(3) { animation-delay: 0.3s; }
-.about .skills-wrap.visible .skill-item:nth-child(4) { animation-delay: 0.4s; }
+.about .skills-wrap.visible .skill-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.about .skills-wrap.visible .skill-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.about .skills-wrap.visible .skill-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.about .skills-wrap.visible .skill-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 /* Animation untuk fun facts */
 .about .facts-wrap.visible .fact-pill {
@@ -1184,10 +1224,18 @@ section .hero {
   transform: translateY(15px);
 }
 
-.about .facts-wrap.visible .fact-pill:nth-child(1) { animation-delay: 0.1s; }
-.about .facts-wrap.visible .fact-pill:nth-child(2) { animation-delay: 0.2s; }
-.about .facts-wrap.visible .fact-pill:nth-child(3) { animation-delay: 0.3s; }
-.about .facts-wrap.visible .fact-pill:nth-child(4) { animation-delay: 0.4s; }
+.about .facts-wrap.visible .fact-pill:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.about .facts-wrap.visible .fact-pill:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.about .facts-wrap.visible .fact-pill:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.about .facts-wrap.visible .fact-pill:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes fadeInUp {
   to {
@@ -1202,13 +1250,11 @@ section .hero {
     transform: translateY(20px);
     margin-bottom: 1.5rem;
   }
-  
+
   .about .section-step {
     margin-top: 3rem;
   }
 }
-
-
 
 /*--------------------------------------------------------------
 # Skills Section
@@ -1220,8 +1266,13 @@ section .hero {
   --radius: 8px;
   --muted: color-mix(in srgb, var(--default-color), transparent 25%);
   --soft-border: color-mix(in srgb, var(--default-color), transparent 85%);
-  --soft-shadow: 0 8px 24px color-mix(in srgb, var(--default-color), transparent 94%);
-  --accent-soft: color-mix(in srgb, var(--accent-color), var(--background-color) 85%);
+  --soft-shadow: 0 8px 24px
+    color-mix(in srgb, var(--default-color), transparent 94%);
+  --accent-soft: color-mix(
+    in srgb,
+    var(--accent-color),
+    var(--background-color) 85%
+  );
   /* Focus styles for accessibility */
   /* Subtle divider behavior via spacing rhythm */
   /* Swiper compatibility snippet (kept global for any future slider inside) */
@@ -1231,7 +1282,9 @@ section .hero {
 .skills .skill-block {
   padding: 22px 6px 6px 6px;
   border-radius: var(--radius);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
   position: relative;
 }
 
@@ -1270,7 +1323,11 @@ section .hero {
 
 .skills .skill-block .progress.slim .progress-bar {
   width: 0%;
-  background: linear-gradient(90deg, var(--accent-color), color-mix(in srgb, var(--accent-color), transparent 20%));
+  background: linear-gradient(
+    90deg,
+    var(--accent-color),
+    color-mix(in srgb, var(--accent-color), transparent 20%)
+  );
   transition: width 0.6s ease-in-out;
 }
 
@@ -1290,7 +1347,8 @@ section .hero {
 
 .skills .soft-card .tool-list li {
   padding: 8px 0;
-  border-bottom: 1px dashed color-mix(in srgb, var(--default-color), transparent 88%);
+  border-bottom: 1px dashed
+    color-mix(in srgb, var(--default-color), transparent 88%);
 }
 
 .skills .soft-card .tool-list li:last-child {
@@ -1353,7 +1411,8 @@ section .hero {
   gap: 4rem;
   margin-bottom: 5rem;
   padding: 2rem 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
   border: none;
 }
 
@@ -1467,7 +1526,8 @@ section .hero {
 
 .resume .experience-grid .experience-item {
   padding: 2.5rem 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 92%);
 }
 
 .resume .experience-grid .experience-item:last-child {
@@ -1519,7 +1579,8 @@ section .hero {
   display: flex;
   gap: 3rem;
   padding: 2rem 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 92%);
 }
 
 .resume .education-list .education-entry:last-child {
@@ -1985,7 +2046,9 @@ section .hero {
   opacity: 0.3;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+.testimonials
+  .swiper-pagination
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background: var(--accent-color);
   opacity: 1;
 }
@@ -2131,7 +2194,8 @@ section .hero {
 --------------------------------------------------------------*/
 .faq .faq-item {
   margin-bottom: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -2379,7 +2443,8 @@ section .hero {
 .contact .contact-form-container .contact-form .form-field .form-input {
   width: 100%;
   border: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 80%);
   background: transparent;
   padding: 20px 0 15px 0;
   font-size: 16px;
@@ -2393,7 +2458,11 @@ section .hero {
   background: transparent;
 }
 
-.contact .contact-form-container .contact-form .form-field .form-input::placeholder {
+.contact
+  .contact-form-container
+  .contact-form
+  .form-field
+  .form-input::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   opacity: 1;
 }
@@ -2431,7 +2500,11 @@ section .hero {
   color: var(--contrast-color);
 }
 
-.contact .contact-form-container .contact-form .send-button:hover .button-arrow {
+.contact
+  .contact-form-container
+  .contact-form
+  .send-button:hover
+  .button-arrow {
   transform: translateX(5px);
 }
 
@@ -2512,7 +2585,8 @@ section .hero {
 }
 
 .contact .contact-sidebar .connect-section {
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
   padding-top: 40px;
 }
 
@@ -2596,7 +2670,8 @@ section .hero {
 .portfolio-details {
   --section-spacing: 5rem;
   --content-spacing: 4rem;
-  --subtle-border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+  --subtle-border: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 92%);
 }
 
 .portfolio-details .project-hero {
@@ -2743,16 +2818,36 @@ section .hero {
   text-align: left;
 }
 
-.portfolio-details .content-section .project-overview .challenge-solution .challenge-block h3,
-.portfolio-details .content-section .project-overview .challenge-solution .solution-block h3 {
+.portfolio-details
+  .content-section
+  .project-overview
+  .challenge-solution
+  .challenge-block
+  h3,
+.portfolio-details
+  .content-section
+  .project-overview
+  .challenge-solution
+  .solution-block
+  h3 {
   font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 1rem;
   color: var(--heading-color);
 }
 
-.portfolio-details .content-section .project-overview .challenge-solution .challenge-block p,
-.portfolio-details .content-section .project-overview .challenge-solution .solution-block p {
+.portfolio-details
+  .content-section
+  .project-overview
+  .challenge-solution
+  .challenge-block
+  p,
+.portfolio-details
+  .content-section
+  .project-overview
+  .challenge-solution
+  .solution-block
+  p {
   color: color-mix(in srgb, var(--default-color), transparent 25%);
   line-height: 1.7;
 }
@@ -2821,20 +2916,33 @@ section .hero {
   gap: 2rem;
 }
 
-.portfolio-details .technology-stack .tech-categories .tech-category .category-title {
+.portfolio-details
+  .technology-stack
+  .tech-categories
+  .tech-category
+  .category-title {
   font-size: 1rem;
   font-weight: 500;
   color: var(--heading-color);
   margin-bottom: 1rem;
 }
 
-.portfolio-details .technology-stack .tech-categories .tech-category .tech-list {
+.portfolio-details
+  .technology-stack
+  .tech-categories
+  .tech-category
+  .tech-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.portfolio-details .technology-stack .tech-categories .tech-category .tech-list .tech-item {
+.portfolio-details
+  .technology-stack
+  .tech-categories
+  .tech-category
+  .tech-list
+  .tech-item {
   padding: 0.5rem 1rem;
   background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
   color: var(--accent-color);
@@ -2844,7 +2952,12 @@ section .hero {
   transition: all 0.3s ease;
 }
 
-.portfolio-details .technology-stack .tech-categories .tech-category .tech-list .tech-item:hover {
+.portfolio-details
+  .technology-stack
+  .tech-categories
+  .tech-category
+  .tech-list
+  .tech-item:hover {
   background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
   transform: translateY(-2px);
 }
@@ -2885,7 +2998,11 @@ section .hero {
   transition: all 0.5s ease;
 }
 
-.portfolio-details .process-gallery .gallery-masonry .gallery-item .gallery-caption {
+.portfolio-details
+  .process-gallery
+  .gallery-masonry
+  .gallery-item
+  .gallery-caption {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -2906,7 +3023,11 @@ section .hero {
   transform: scale(1.05);
 }
 
-.portfolio-details .process-gallery .gallery-masonry .gallery-item:hover .gallery-caption {
+.portfolio-details
+  .process-gallery
+  .gallery-masonry
+  .gallery-item:hover
+  .gallery-caption {
   transform: translateY(0);
 }
 
@@ -2937,11 +3058,18 @@ section .hero {
   margin-bottom: 2.5rem;
 }
 
-.portfolio-details .key-features-section .features-list .feature-row:last-child {
+.portfolio-details
+  .key-features-section
+  .features-list
+  .feature-row:last-child {
   margin-bottom: 0;
 }
 
-.portfolio-details .key-features-section .features-list .feature-row .feature-icon {
+.portfolio-details
+  .key-features-section
+  .features-list
+  .feature-row
+  .feature-icon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -2952,19 +3080,34 @@ section .hero {
   flex-shrink: 0;
 }
 
-.portfolio-details .key-features-section .features-list .feature-row .feature-icon i {
+.portfolio-details
+  .key-features-section
+  .features-list
+  .feature-row
+  .feature-icon
+  i {
   font-size: 1.2rem;
   color: var(--accent-color);
 }
 
-.portfolio-details .key-features-section .features-list .feature-row .feature-content h4 {
+.portfolio-details
+  .key-features-section
+  .features-list
+  .feature-row
+  .feature-content
+  h4 {
   font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
   color: var(--heading-color);
 }
 
-.portfolio-details .key-features-section .features-list .feature-row .feature-content p {
+.portfolio-details
+  .key-features-section
+  .features-list
+  .feature-row
+  .feature-content
+  p {
   color: color-mix(in srgb, var(--default-color), transparent 25%);
   line-height: 1.7;
   margin-bottom: 0;
@@ -2993,8 +3136,16 @@ section .hero {
   color: var(--heading-color);
 }
 
-.portfolio-details .project-footer .footer-navigation .nav-link.prev-project .nav-direction,
-.portfolio-details .project-footer .footer-navigation .nav-link.next-project .nav-direction {
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.prev-project
+  .nav-direction,
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.next-project
+  .nav-direction {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -3002,14 +3153,28 @@ section .hero {
   margin-bottom: 0.25rem;
 }
 
-.portfolio-details .project-footer .footer-navigation .nav-link.prev-project .nav-title,
-.portfolio-details .project-footer .footer-navigation .nav-link.next-project .nav-title {
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.prev-project
+  .nav-title,
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.next-project
+  .nav-title {
   font-size: 1.1rem;
   font-weight: 500;
 }
 
-.portfolio-details .project-footer .footer-navigation .nav-link.prev-project:hover,
-.portfolio-details .project-footer .footer-navigation .nav-link.next-project:hover {
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.prev-project:hover,
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.next-project:hover {
   color: var(--accent-color);
   transform: translateY(-3px);
 }
@@ -3035,7 +3200,10 @@ section .hero {
   font-size: 1rem;
 }
 
-.portfolio-details .project-footer .footer-navigation .nav-link.all-projects:hover {
+.portfolio-details
+  .project-footer
+  .footer-navigation
+  .nav-link.all-projects:hover {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--contrast-color);
@@ -3127,7 +3295,12 @@ section .hero {
     order: -1;
   }
 
-  .portfolio-details .technology-stack .tech-categories .tech-category .tech-list .tech-item {
+  .portfolio-details
+    .technology-stack
+    .tech-categories
+    .tech-category
+    .tech-list
+    .tech-item {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
@@ -3336,27 +3509,47 @@ section .hero {
   z-index: 1;
 }
 
-.service-details .timeline-section .timeline .timeline-item .timeline-marker span {
+.service-details
+  .timeline-section
+  .timeline
+  .timeline-item
+  .timeline-marker
+  span {
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--accent-color);
 }
 
-.service-details .timeline-section .timeline .timeline-item .timeline-content h4 {
+.service-details
+  .timeline-section
+  .timeline
+  .timeline-item
+  .timeline-content
+  h4 {
   font-size: 1.3rem;
   font-weight: 400;
   margin-bottom: 0.75rem;
   color: var(--heading-color);
 }
 
-.service-details .timeline-section .timeline .timeline-item .timeline-content p {
+.service-details
+  .timeline-section
+  .timeline
+  .timeline-item
+  .timeline-content
+  p {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 0.5rem;
   color: var(--default-color);
 }
 
-.service-details .timeline-section .timeline .timeline-item .timeline-content small {
+.service-details
+  .timeline-section
+  .timeline
+  .timeline-item
+  .timeline-content
+  small {
   color: color-mix(in srgb, var(--default-color), transparent 40%);
   font-size: 0.9rem;
   font-weight: 500;
@@ -3425,7 +3618,8 @@ section .hero {
 }
 
 .service-details .overview-card .overview-details {
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
   padding-top: 1.5rem;
 }
 
@@ -3498,7 +3692,8 @@ section .hero {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   padding-top: 1.5rem;
-  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-top: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .service-details .success-story .story-metrics .metric {
@@ -3558,9 +3753,9 @@ section .hero {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 90%);
 }
 
-.service-details .consultation-form input[type=text],
-.service-details .consultation-form input[type=email],
-.service-details .consultation-form input[type=tel],
+.service-details .consultation-form input[type="text"],
+.service-details .consultation-form input[type="email"],
+.service-details .consultation-form input[type="tel"],
 .service-details .consultation-form select,
 .service-details .consultation-form textarea {
   color: var(--default-color);
@@ -3569,17 +3764,17 @@ section .hero {
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.service-details .consultation-form input[type=text]:focus,
-.service-details .consultation-form input[type=email]:focus,
-.service-details .consultation-form input[type=tel]:focus,
+.service-details .consultation-form input[type="text"]:focus,
+.service-details .consultation-form input[type="email"]:focus,
+.service-details .consultation-form input[type="tel"]:focus,
 .service-details .consultation-form select:focus,
 .service-details .consultation-form textarea:focus {
   border-color: var(--accent-color);
 }
 
-.service-details .consultation-form input[type=text]::placeholder,
-.service-details .consultation-form input[type=email]::placeholder,
-.service-details .consultation-form input[type=tel]::placeholder,
+.service-details .consultation-form input[type="text"]::placeholder,
+.service-details .consultation-form input[type="email"]::placeholder,
+.service-details .consultation-form input[type="tel"]::placeholder,
 .service-details .consultation-form select::placeholder,
 .service-details .consultation-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
@@ -3642,7 +3837,12 @@ section .hero {
     height: 40px;
   }
 
-  .service-details .timeline-section .timeline .timeline-item .timeline-marker span {
+  .service-details
+    .timeline-section
+    .timeline
+    .timeline-item
+    .timeline-marker
+    span {
     font-size: 1rem;
   }
 
@@ -3655,9 +3855,7 @@ section .hero {
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}
+
 
 .hero {
   min-height: 100vh;
@@ -3669,4 +3867,3 @@ section .hero {
   width: 100%;
   height: 100%;
 }
-
