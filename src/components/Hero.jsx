@@ -114,8 +114,7 @@ const Hero = () => {
                 data-aos="zoom-in"
                 data-aos-delay="300"
               >
-                <i className="bi bi-star"></i>
-                <span>10+ yrs building elegant UIs</span>
+                <span>- 11th grade vocational school students</span>
               </div>
             </figure>
           </div>

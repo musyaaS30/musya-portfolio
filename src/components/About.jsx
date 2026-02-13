@@ -34,13 +34,13 @@ const About = () => {
         "Building interactive websites using HTML, CSS, JavaScript, React.js, and Tailwind CSS.",
       delay: 180,
     },
-    {
-      icon: "bi-hdd-network",
-      title: "Backend & API Development",
-      description:
-        "Developing RESTful APIs using Node.js, Express, PHP, and integrating MySQL databases.",
-      delay: 240,
-    },
+    // {
+    //   icon: "bi-hdd-network",
+    //   title: "Backend & API Development",
+    //   description:
+    //     "Developing RESTful APIs using Node.js, Express, PHP, and integrating MySQL databases.",
+    //   delay: 240,
+    // },
     {
       icon: "bi-phone",
       title: "Responsive & Mobile-First Design",
@@ -209,7 +209,7 @@ const About = () => {
             visibleSections.skills ? "visible" : ""
           }`}
         >
-          <div className="row g-4">
+          <div className="row justify-content-center g-4">
             {skills.map((skill, index) => (
               <div key={index} className="col-6 col-md-4 col-lg-3">
                 <div className="skill-item">
