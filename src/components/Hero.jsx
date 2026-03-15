@@ -114,7 +114,7 @@ const Hero = () => {
                 data-aos="zoom-in"
                 data-aos-delay="300"
               >
-                <span>- 11th grade vocational school students</span>
+                <span>11th grade vocational school students</span>
               </div>
             </figure>
           </div>

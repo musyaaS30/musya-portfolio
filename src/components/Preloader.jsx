@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import '../styles/Preloader.css'; 
+import { useState, useEffect } from "react";
+import "../styles/Preloader.css";
 
 const Preloader = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -12,10 +12,15 @@ const Preloader = () => {
       progress++;
       setCounter(progress);
 
+      // Di dalam useEffect Preloader kamu
       if (progress >= 100) {
         clearInterval(interval);
         setTimeout(() => {
           setIsFadingOut(true);
+
+          // 🔥 TAMBAHKAN INI: Kirim sinyal bahwa preloader mulai hilang
+          window.dispatchEvent(new Event("preloaderFinished"));
+
           setTimeout(() => {
             setIsVisible(false);
           }, 2000);
@@ -29,15 +34,17 @@ const Preloader = () => {
   if (!isVisible) return null;
 
   return (
-    <div id="preloader" className={isFadingOut ? 'fade-out' : ''}>
+    <div id="preloader" className={isFadingOut ? "fade-out" : ""}>
       <div className="letters">
-        {['M', 'U', 'S', 'Y', 'A'].map((letter, index) => (
+        {["M", "U", "S", "Y", "A"].map((letter, index) => (
           <div key={index} style={{ animationDelay: `${index * 0.1}s` }}>
             {letter}
           </div>
         ))}
       </div>
-      <div className="counter" id="preloader-counter">{counter}%</div>
+      <div className="counter" id="preloader-counter">
+        {counter}%
+      </div>
     </div>
   );
 };

@@ -1,14 +1,15 @@
 .portfolio-masonry {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 3 kolom tetap */
-  gap: 24px;
+  gap: 14px;
   margin: 0 auto;
   max-width: 1200px;
 }
 
 .portfolio-item {
+  border: 2px solid #777777;
   position: relative;
-  border-radius: 16px;
+  border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;

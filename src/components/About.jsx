@@ -189,7 +189,7 @@ const About = () => {
           <div className="col-lg-5">
             <figure className="profile-figure text-center text-lg-end">
               <img
-                src="/assets/img/profile/profile2.jpg"
+                src="/assets/img/profile/profile2.jpeg"
                 alt="Portrait of Musyahadat"
                 className="img-fluid profile-photo"
                 onError={(e) => {
