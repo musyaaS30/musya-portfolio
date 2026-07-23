@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import AnimatedBorder from "./ui/AnimatedBorder";
+import designImage from "/assets/img/ilustration/designImage.webp";
+import codeImage from "/assets/img/ilustration/codeImage.webp";
+import performanceImage from "/assets/img/ilustration/performanceImage.webp";
 
 const About = () => {
   const [visibleSections, setVisibleSections] = useState({
@@ -25,6 +29,7 @@ const About = () => {
       title: "UI/UX Design",
       description:
         "Designing modern, responsive, and user-friendly interfaces with a strong focus on user experience.",
+      image: designImage,
       delay: 120,
     },
     {
@@ -32,20 +37,16 @@ const About = () => {
       title: "Frontend Development",
       description:
         "Building interactive websites using HTML, CSS, JavaScript, React.js, and Tailwind CSS.",
+      image: codeImage,
       delay: 180,
     },
-    // {
-    //   icon: "bi-hdd-network",
-    //   title: "Backend & API Development",
-    //   description:
-    //     "Developing RESTful APIs using Node.js, Express, PHP, and integrating MySQL databases.",
-    //   delay: 240,
-    // },
+
     {
-      icon: "bi-phone",
-      title: "Responsive & Mobile-First Design",
+      icon: "bi-speedometer2",
+      title: "Performance Optimization",
       description:
-        "Optimizing layouts to ensure excellent performance and usability across all devices, especially mobile.",
+        "Building fast-loading websites with optimized assets, clean code, and smooth user experiences.",
+      image: performanceImage,
       delay: 300,
     },
   ];
@@ -129,35 +130,19 @@ const About = () => {
               <h2
                 ref={headlineRef}
                 data-section="headline"
-                className={`headline text-step ${
-                  visibleSections.headline ? "visible" : ""
-                }`}
+                className={`headline text-step ${visibleSections.headline ? "visible" : ""
+                  }`}
               >
                 Hi, I'm Musyahadat Safitrah — a passionate student & aspiring
                 developer crafting creative digital projects
               </h2>
 
-              {/* Lead Paragraph - Section 2 */}
-              <p
-                ref={leadRef}
-                data-section="lead"
-                className={`lead text-step ${
-                  visibleSections.lead ? "visible" : ""
-                }`}
-              >
-                I'm a student at SMKN 12 Jakarta currently studying programming
-                and application development. I enjoy learning new technologies,
-                building IT projects, and continually honing my skills to become
-                a professional programmer in the future.
-              </p>
-
               {/* Paragraph - Section 3 */}
               <p
                 ref={paragraphRef}
                 data-section="paragraph"
-                className={`text-step ${
-                  visibleSections.paragraph ? "visible" : ""
-                }`}
+                className={`text-step ${visibleSections.paragraph ? "visible" : ""
+                  }`}
               >
                 I believe that every line of code is not just an instruction for
                 a computer, but also a work of art that can be useful for
@@ -168,9 +153,8 @@ const About = () => {
               <div
                 ref={ctaRef}
                 data-section="cta"
-                className={`cta-group text-step ${
-                  visibleSections.cta ? "visible" : ""
-                }`}
+                className={`cta-group text-step ${visibleSections.cta ? "visible" : ""
+                  }`}
               >
                 <a href="#portfolio" className="btn btn-ghost">
                   View My Work <i className="bi bi-arrow-down"></i>
@@ -205,17 +189,19 @@ const About = () => {
         <div
           ref={skillsRef}
           data-section="skills"
-          className={`skills-wrap section-step ${
-            visibleSections.skills ? "visible" : ""
-          }`}
+          className={`skills-wrap section-step ${visibleSections.skills ? "visible" : ""
+            }`}
         >
           <div className="row justify-content-center g-4">
             {skills.map((skill, index) => (
               <div key={index} className="col-6 col-md-4 col-lg-3">
-                <div className="skill-item">
-                  <i className={`bi ${skill.icon}`}></i>
-                  <h3>{skill.title}</h3>
-                  <p>{skill.description}</p>
+                <div className="skill-item relative group">
+                  <AnimatedBorder />
+                  <div className="relative z-10">
+                    <img className="w-50 object-cover aspect-square mb-3" src={skill.image} alt={skill.title} />
+                    <h3>{skill.title}</h3>
+                    <p>{skill.description}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -226,9 +212,8 @@ const About = () => {
         <blockquote
           ref={quoteRef}
           data-section="quote"
-          className={`personal-quote section-step ${
-            visibleSections.quote ? "visible" : ""
-          }`}
+          className={`personal-quote section-step ${visibleSections.quote ? "visible" : ""
+            }`}
         >
           <p>
             "Building clean and meaningful experiences through thoughtful code
@@ -240,9 +225,8 @@ const About = () => {
         <div
           ref={factsRef}
           data-section="facts"
-          className={`facts-wrap section-step ${
-            visibleSections.facts ? "visible" : ""
-          }`}
+          className={`facts-wrap section-step ${visibleSections.facts ? "visible" : ""
+            }`}
         >
           <div className="row g-3 justify-content-center">
             {funFacts.map((fact, index) => (

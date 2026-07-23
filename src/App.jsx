@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Intro from './pages/Intro'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import './styles/main.css'
@@ -24,7 +23,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Intro />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home"  element={<Home />} />
         
         {/* Catch all undefined routes - Show 404 */}

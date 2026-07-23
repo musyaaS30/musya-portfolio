@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /**
 * Template Name: MinimalFolio
 * Template URL: https://bootstrapmade.com/minimalfolio-bootstrap-portfolio-template/
@@ -979,7 +981,7 @@ section .hero {
 
 .about .skills-wrap .skill-item {
   padding: var(--space-2);
-  border-radius: var(--radius-s);
+  /* border-radius: var(--radius-s); */
   transition: 0.3s ease-in-out;
   background: color-mix(in srgb, var(--surface-color), var(--accent-color) 2%);
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
@@ -1007,7 +1009,6 @@ section .hero {
 
 .about .skills-wrap .skill-item:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--accent-color), transparent 60%);
   box-shadow: var(--shadow-soft);
 }
 

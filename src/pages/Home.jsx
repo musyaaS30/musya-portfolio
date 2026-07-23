@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import About from '../components/About'
@@ -15,15 +14,6 @@ import Preloader from '../components/Preloader'
 import CustomCursor from '../components/CustomCursor'
 
 const Home = () => {
-  useEffect(() => {
-    // Check if username exists in localStorage
-    const username = localStorage.getItem("username");
-    if (!username) {
-      // Redirect to intro page if no username
-      window.location.href = '/';
-    }
-  }, []);
-
   return (
     <div className="index-page">
       <Preloader />

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDarkMode } from "../hooks/useDarkMode";
 import DotGrid from "../../public/assets/elements/dotGrid";
+import Switch from "./ui/Switch";
 
 const Header = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const username = localStorage.getItem("username") || "Guest";
 
   // Handle mobile nav toggle
   const toggleMobileNav = () => {
@@ -120,14 +120,7 @@ const Header = () => {
 
         {/* Dark Mode Toggle */}
         <div className="toggle-container">
-          <button
-            id="darkModeToggle"
-            className="toggle-switch"
-            aria-label="Toggle dark mode"
-            onClick={toggleDarkMode}
-          >
-            <span className="toggle-slider">{isDarkMode ? "☀️" : "🌙"}</span>
-          </button>
+          <Switch isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
         </div>
 
         {/* Mobile Nav Toggle - Always visible but positioned fixed */}

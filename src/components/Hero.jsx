@@ -1,16 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import DotGrid from "../../public/assets/elements/dotGrid";
 
 const Hero = () => {
-  const [username, setUsername] = useState("Guest");
-
-  useEffect(() => {
-    // Client-side only untuk localStorage
-    const storedUsername = localStorage.getItem("username") || "Guest";
-    setUsername(storedUsername);
-  }, []);
-
   return (
     <section
       id="hero"
@@ -46,9 +37,7 @@ const Hero = () => {
             <div className="intro" data-aos="fade-right" data-aos-delay="150">
               <div className="eyebrow d-inline-flex align-items-center gap-2 mb-3">
                 <span className="dot"></span>
-                <span className="text">
-                  Halo <span id="displayName">{username}</span>
-                </span>
+                <span className="text">Halo</span>
               </div>
 
               <h1 className="display-heading mb-3">
