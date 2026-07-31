@@ -1,7 +1,10 @@
 "use client";
 import DotGrid from "../../public/assets/elements/dotGrid";
+import { useTheme } from "../context/ThemeContext";
 
 const Hero = () => {
+  const { isDarkMode } = useTheme();
+
   return (
     <section
       id="hero"
@@ -12,8 +15,11 @@ const Hero = () => {
         <DotGrid
           dotSize={4}
           gap={28}
-          baseColor="#eaeaea" // Soft blue untuk light mode
+          forceDarkMode={isDarkMode}
+          baseColor="#eaeaea"
           activeColor="#777777"
+          darkModeBaseColor="#333333"
+          darkModeActiveColor="#00d084"
           proximity={100}
           speedTrigger={50}
           shockStrength={1.5}
@@ -37,7 +43,7 @@ const Hero = () => {
             <div className="intro" data-aos="fade-right" data-aos-delay="150">
               <div className="eyebrow d-inline-flex align-items-center gap-2 mb-3">
                 <span className="dot"></span>
-                <span className="text">Halo</span>
+                <span className="text">Hello</span>
               </div>
 
               <h1 className="display-heading mb-3">

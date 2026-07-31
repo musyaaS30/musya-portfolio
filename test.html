@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Infinite Curved Gallery — GSAP + Lenis</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; background:#f3f1ec; font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+  .intro, .outro {
+    height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align:center;
+    padding: 0 20px;
+  }
+
+  .pin-wrap {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    perspective: 1400px;
+    perspective-origin: 50% 45%;
+  }
+
+  .track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 1px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 0 12vw;
+    will-change: transform;
+    transform-style: preserve-3d;
+  }
+
+  .card {
+    position: relative;
+    flex: 0 0 auto;
+    width: 300px;
+    height: 420px;
+    margin-top: -210px;
+    background: #ddd;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.35);
+    overflow: hidden;
+    border-radius: 6px;
+    will-change: transform;
+    transform-origin: center center;
+    backface-visibility: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    pointer-events:none;
+  }
+
+  .badge {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color:#111;
+    opacity:.6;
+  }
+
+  .progress {
+    position: fixed;
+    left: 0; bottom: 0;
+    height: 3px;
+    background: #111;
+    width: 0%;
+    z-index: 10;
+  }
+
+  .center-line {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(0,0,0,.08);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="center-line"></div>
+
+<section class="intro">↓ scroll untuk lihat galeri infinity ↓</section>
+
+<section class="pin-wrap">
+  <div class="track" id="track">
+    <!-- Card akan di-generate oleh JavaScript -->
+  </div>
+</section>
+
+<section class="outro">— end —</section>
+
+<div class="badge">GSAP + Lenis · infinite curved loop</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ===== 1) Konfigurasi =====
+  const IMAGES = [
+    'https://picsum.photos/id/1011/600/800',
+    'https://picsum.photos/id/1027/600/800',
+    'https://picsum.photos/id/1005/600/800',
+    'https://picsum.photos/id/1012/600/800',
+    'https://picsum.photos/id/1013/600/800',
+    'https://picsum.photos/id/1025/600/800',
+    'https://picsum.photos/id/1035/600/800',
+    'https://picsum.photos/id/1041/600/800',
+    'https://picsum.photos/id/1044/600/800',
+    'https://picsum.photos/id/1055/600/800',
+    'https://picsum.photos/id/1060/600/800',
+    'https://picsum.photos/id/1069/600/800',
+  ];
+
+  const TOTAL_CARDS = 40; // Total card yang akan ditampilkan
+  const CARD_WIDTH = 300;
+  const GAP = 50;
+  const TOTAL_WIDTH = (CARD_WIDTH + GAP) * TOTAL_CARDS;
+  
+  // Konfigurasi curve
+  const CURVE_STRENGTH = 190;
+  const MAX_ROTATE_Y = 55;
+  const MAX_TILT_Z = 16;
+  const MIN_SCALE = 0.7;
+  const MAX_SCALE = 1.15;
+  const MAX_DEPTH = 180;
+
+  // ===== 2) Generate random Y offset untuk setiap card =====
+  function generateRandomYOffsets(count) {
+    const offsets = [];
+    for (let i = 0; i < count; i++) {
+      // Random antara -80 sampai 80 dengan beberapa nilai ekstrim untuk variasi
+      let yOffset;
+      const rand = Math.random();
+      if (rand < 0.1) {
+        // 10% chance untuk offset besar
+        yOffset = (Math.random() - 0.5) * 200;
+      } else {
+        yOffset = (Math.random() - 0.5) * 120;
+      }
+      offsets.push(yOffset);
+    }
+    return offsets;
+  }
+
+  const randomYOffsets = generateRandomYOffsets(TOTAL_CARDS);
+
+  // ===== 3) Generate card =====
+  const track = document.getElementById('track');
+  const progressBar = document.getElementById('progress');
+
+  // Buat card sebanyak TOTAL_CARDS
+  for (let i = 0; i < TOTAL_CARDS; i++) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.index = i;
+    card.dataset.yOffset = randomYOffsets[i];
+    
+    const img = document.createElement('img');
+    img.src = IMAGES[i % IMAGES.length];
+    img.alt = `Gallery ${i + 1}`;
+    img.loading = 'lazy';
+    
+    card.appendChild(img);
+    track.appendChild(card);
+  }
+
+  // ===== 4) Duplicate cards untuk infinite loop =====
+  // Ambil semua card yang sudah dibuat
+  const allCards = document.querySelectorAll('.card');
+  const cardsToClone = Array.from(allCards);
+  
+  // Clone semua card dan tambahkan ke track
+  cardsToClone.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.classList.add('clone');
+    track.appendChild(clone);
+  });
+
+  // Refresh cards array setelah cloning
+  const cards = gsap.utils.toArray('.card');
+
+  // ===== 5) Lenis =====
+  const lenis = new Lenis({ 
+    duration: 1.1, 
+    smoothWheel: true,
+    infinite: true // Aktifkan infinite scroll
+  });
+  lenis.on('scroll', ScrollTrigger.update);
+
+  // ===== 6) Pin section + infinite scroll =====
+  // Scroll amount yang sangat panjang untuk infinite
+  const SCROLL_AMOUNT = TOTAL_WIDTH * 2;
+
+  gsap.to(track, {
+    x: -SCROLL_AMOUNT,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".pin-wrap",
+      start: "top top",
+      end: () => `+=${SCROLL_AMOUNT}`,
+      scrub: 1,
+      pin: true,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        progressBar.style.width = (self.progress * 100) + "%";
+        
+        // Infinite loop logic: reset posisi track saat mencapai ujung
+        const currentX = parseFloat(track.style.transform?.replace(/[^0-9\-.]/g, '') || '0');
+        if (currentX <= -TOTAL_WIDTH) {
+          gsap.set(track, { x: currentX + TOTAL_WIDTH });
+        }
+      }
+    }
+  });
+
+  // ===== 7) Update curve dengan random Y offset =====
+  function updateCurve() {
+    const centerX = window.innerWidth / 2;
+    const maxDist = window.innerWidth / 2 + 30;
+
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const yOffset = parseFloat(card.dataset.yOffset) || 0;
+
+      let dist = (cardCenter - centerX) / maxDist;
+      dist = gsap.utils.clamp(-1, 1, dist);
+
+      const absDist = Math.abs(dist);
+
+      // Base curve Y
+      let curveY = Math.pow(absDist, 1.6) * CURVE_STRENGTH;
+      
+      // Tambahkan random Y offset yang sudah ditentukan
+      // Semakin dekat ke tengah, semakin besar pengaruh offset-nya
+      const influence = 1 - absDist * 0.5; // 0.5 di tengah, 0 di tepi
+      curveY += yOffset * influence;
+
+      const rotateY = -dist * MAX_ROTATE_Y;
+      const rotateZ = dist * MAX_TILT_Z;
+      const z = -(1 - absDist) * MAX_DEPTH;
+      const scale = MIN_SCALE + absDist * (MAX_SCALE - MIN_SCALE);
+      const opacity = 1 - Math.pow(absDist, 2.5) * 0.2;
+
+      gsap.set(card, {
+        y: curveY,
+        rotationY: rotateY,
+        rotationZ: rotateZ,
+        z: z,
+        scale: scale,
+        opacity: opacity,
+        transformPerspective: 1200,
+        force3D: true
+      });
+    });
+  }
+
+  // ===== 8) Loop utama =====
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+    updateCurve();
+  });
+  gsap.ticker.lagSmoothing(0);
+
+  window.addEventListener('resize', () => ScrollTrigger.refresh());
+
+  // ===== 9) Reset infinite scroll position saat mencapai akhir =====
+  // Tambahan: reset progress bar untuk infinite feel
+  let scrollProgress = 0;
+  ScrollTrigger.addEventListener('refresh', () => {
+    // Reset posisi scroll untuk infinite
+    const currentX = parseFloat(track.style.transform?.replace(/[^0-9\-.]/g, '') || '0');
+    if (currentX < -TOTAL_WIDTH) {
+      gsap.set(track, { x: currentX + TOTAL_WIDTH });
+    }
+  });
+
+  console.log(`✅ Infinite gallery loaded with ${TOTAL_CARDS} cards`);
+</script>
+
+</body>
+</html>

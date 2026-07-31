@@ -7,32 +7,32 @@ const FAQ = () => {
     {
       id: 1,
       number: '01',
-      question: 'Apakah kamu bisa membuat website dari nol?',
-      answer: 'Ya! Saya bisa membangun website dari perencanaan UI/UX, pembuatan frontend, hingga backend lengkap dengan database serta hosting.'
+      question: 'Can you build a website from scratch?',
+      answer: 'Yes! I can build a website from UI/UX planning, frontend development, to a complete backend with database and hosting.'
     },
     {
       id: 2,
       number: '02',
-      question: 'Teknologi apa saja yang kamu gunakan?',
-      answer: 'Saya menggunakan HTML, CSS, JavaScript, Tailwind, React, Node.js, MySQL, serta API modern sesuai kebutuhan proyek.'
+      question: 'What technologies do you use?',
+      answer: 'I use HTML, CSS, JavaScript, Tailwind, React, Node.js, MySQL, and modern APIs as needed for the project.'
     },
     {
       id: 3,
       number: '03',
-      question: 'Apakah websitenya responsif untuk semua perangkat?',
-      answer: 'Semua website yang saya buat sudah responsif agar tampil optimal di smartphone, tablet, maupun desktop.'
+      question: 'Is the website responsive for all devices?',
+      answer: 'All websites I create are responsive to display optimally on smartphones, tablets, and desktops.'
     },
     {
       id: 4,
       number: '04',
-      question: 'Apakah kamu bisa menambahkan fitur khusus?',
-      answer: 'Tentu! Mulai dari sistem login, pembayaran, dashboard admin, photobooth camera, hingga API integrasi — saya bisa bantu buatkan.'
+      question: 'Can you add custom features?',
+      answer: 'Of course! From login systems, payments, admin dashboards, photobooth camera, to API integration — I can help build them.'
     },
     {
       id: 5,
       number: '05',
-      question: 'Bagaimana proses kerja untuk proyek website?',
-      answer: 'Mulai dari diskusi kebutuhan, pembuatan desain, pengembangan, revisi, hingga publikasi ke domain hosting — semuanya saya bantu.'
+      question: 'How does the workflow for a website project work?',
+      answer: 'Starting from requirements discussion, design creation, development, revisions, to publishing on hosting domain — I help with everything.'
     }
   ];
 

@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import About from '../components/About'
@@ -14,6 +16,17 @@ import Preloader from '../components/Preloader'
 import CustomCursor from '../components/CustomCursor'
 
 const Home = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const scrollTo = location.state?.scrollTo;
+    if (scrollTo) {
+      const el = document.getElementById(scrollTo);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 200);
+      }
+    }
+  }, [location.state?.scrollTo]);
   return (
     <div className="index-page">
       <Preloader />
@@ -23,7 +36,7 @@ const Home = () => {
         <Hero />
         <About />
         <Skills />
-        <Resume />
+        {/* <Resume /> */}
         <Portfolio />
         {/* <Testimonials /> */}
         {/* <Services /> */}

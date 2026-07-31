@@ -9,7 +9,7 @@ const Resume = () => {
       company: "Kokurikuler – Website Sekatas (Second Shoes Marketplace)",
       period: "September 2025",
       description:
-        "Memimpin tim dalam pengembangan website Sekatas, platform penjualan sepatu bekas, mengatur pembagian tugas, alur kerja proyek, serta memastikan kebutuhan fitur dan timeline terpenuhi.",
+        "Led the team in developing the Sekatas website, a second-hand shoe sales platform, managing task distribution, project workflows, and ensuring feature requirements and timelines were met.",
       delay: 400,
     },
     {
@@ -17,7 +17,7 @@ const Resume = () => {
       company: "Website SUDIN Pendidikan",
       period: "Agustus 2025 – September 2025",
       description:
-        "Mengembangkan frontend website dengan tampilan responsif dan interaktif, serta memastikan pengalaman pengguna yang optimal.",
+        "Developed the frontend website with responsive and interactive design, ensuring an optimal user experience.",
       delay: 450,
     },
     {
@@ -25,23 +25,23 @@ const Resume = () => {
       company: "Website Paskibra SMAS 12 Jakarta",
       period: "Juni 2025 – Juli 2025",
       description:
-        "Mendesain dan membangun website Paskibra sebagai media informasi dan promosi kegiatan ekstrakurikuler.",
+        "Designed and built the Paskibra website as an information and promotion medium for extracurricular activities.",
       delay: 500,
     },
     {
-      title: "Peserta & Juara 2",
+      title: "Participant & 2nd Place Winner",
       company: "LKS 2025 IT Software for Business",
       period: "Mei 2025",
       description:
-        "Mengembangkan aplikasi desktop berbasis e-commerce dalam kompetisi IT Software for Business dan meraih Juara 2.",
+        "Developed an e-commerce desktop application for the IT Software for Business competition and won 2nd place.",
       delay: 550,
     },
     {
-      title: "Juara 2 – Robothon Internasional",
+      title: "2nd Place – International Robothon",
       company: "International Robothon Competition",
       period: "November 2025",
       description:
-        "Meraih Juara 2 dalam kompetisi robotik tingkat internasional melalui kolaborasi tim dan penyelesaian tantangan berbasis teknologi.",
+        "Achieved 2nd place in an international robotics competition through team collaboration and technology-based problem solving.",
       delay: 450,
     },
   ];
@@ -66,7 +66,7 @@ const Resume = () => {
     {
       year: "2024",
       degree: "SMK Negeri 12 Jakarta",
-      institution: "Kejuruan Rekayasa Perangkat Lunak",
+      institution: "Software Engineering",
       description:
         "Currently studying at SMK Negeri 12 Jakarta, majoring in Software Engineering, with a focus on web development, programming, and software technology.",
       delay: 500,
@@ -109,7 +109,7 @@ const Resume = () => {
   ];
 
   return (
-    <section id="resume" className="resume section">
+    <section className="resume section">
       {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <h2>Resume</h2>

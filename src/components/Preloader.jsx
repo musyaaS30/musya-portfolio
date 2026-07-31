@@ -12,13 +12,13 @@ const Preloader = () => {
       progress++;
       setCounter(progress);
 
-      // Di dalam useEffect Preloader kamu
+      // Inside your Preloader useEffect
       if (progress >= 100) {
         clearInterval(interval);
         setTimeout(() => {
           setIsFadingOut(true);
 
-          // 🔥 TAMBAHKAN INI: Kirim sinyal bahwa preloader mulai hilang
+          // 🔥 ADD THIS: Send signal that preloader starts disappearing
           window.dispatchEvent(new Event("preloaderFinished"));
 
           setTimeout(() => {

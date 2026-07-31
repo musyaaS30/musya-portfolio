@@ -5,6 +5,7 @@ import NotFound from './pages/NotFound'
 import './styles/main.css'
 import './styles/darkMode.css'
 import './styles/skillsIcon.css'
+import Resumepage from './pages/Resumepage'
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home"  element={<Home />} />
+        <Route path="/resume"  element={<Resumepage />} />
         
         {/* Catch all undefined routes - Show 404 */}
         <Route path="*" element={<NotFound />} />

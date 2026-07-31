@@ -11,52 +11,52 @@ const Skills = () => {
     {
       src: "/assets/img/skills/html-logo.png",
       alt: "HTML",
-      info: "<b>HTML - </b><br>Bahasa markup untuk membuat struktur website",
+      info: "<b>HTML - </b><br>Markup language for creating website structure",
     },
     {
       src: "/assets/img/skills/js-logo.png",
       alt: "JavaScript",
-      info: "<b>JavaScript - </b><br>Bahasa pemrograman interaktif untuk web",
+      info: "<b>JavaScript - </b><br>Interactive programming language for the web",
     },
     {
       src: "/assets/img/skills/node-logo.png",
       alt: "Node.js",
-      info: "<b>Node.js - </b><br>JavaScript runtime untuk backend",
+      info: "<b>Node.js - </b><br>JavaScript runtime for backend development",
     },
     {
       src: "/assets/img/skills/react-logo.png",
       alt: "React",
-      info: "<b>React - </b><br>Library frontend untuk UI interaktif",
+      info: "<b>React - </b><br>Frontend library for interactive UI",
     },
     {
       src: "/assets/img/skills/tailwind-logo.png",
       alt: "Tailwind CSS",
-      info: "<b>Tailwind CSS - </b><br>Framework CSS untuk desain cepat",
+      info: "<b>Tailwind CSS - </b><br>CSS framework for rapid design",
     },
     {
       src: "/assets/img/skills/cloudflare-logo.png",
       alt: "Cloudflare",
-      info: "<b>Cloudflare - </b><br>CDN dan layanan keamanan untuk website",
+      info: "<b>Cloudflare - </b><br>CDN and security services for websites",
     },
     {
       src: "/assets/img/skills/github-logo.png",
       alt: "GitHub",
-      info: "<b>GitHub - </b><br>Platform untuk version control dan kolaborasi menggunakan Git",
+      info: "<b>GitHub - </b><br>Platform for version control and collaboration using Git",
     },
     {
       src: "/assets/img/skills/claude-logo.png",
       alt: "Claude AI",
-      info: "<b>Claude AI - </b><br>AI assistant untuk coding, penulisan, dan produktivitas",
+      info: "<b>Claude AI - </b><br>AI assistant for coding, writing, and productivity",
     },
     {
       src: "/assets/img/skills/css-logo.png",
       alt: "CSS",
-      info: "<b>CSS - </b><br>Bahasa stylesheet untuk mendesain tampilan website",
+      info: "<b>CSS - </b><br>Stylesheet language for designing website visuals",
     },
     {
       src: "/assets/img/skills/mysql-logo.png",
       alt: "MySQL",
-      info: "<b>MySQL - </b><br>Sistem manajemen basis data relasional (RDBMS)",
+      info: "<b>MySQL - </b><br>Relational database management system (RDBMS)",
     },
   ];
 
@@ -137,7 +137,7 @@ const Skills = () => {
 
         if (!images || images.length === 0) return;
 
-        // Ambil dimensi kontainer. Fallback ke window jika container belum dirender dengan benar.
+        // Get container dimensions. Fallback to window if container hasn't been rendered correctly.
         const containerWidth = containerRef.current
           ? containerRef.current.offsetWidth
           : window.innerWidth;
@@ -145,33 +145,33 @@ const Skills = () => {
           ? containerRef.current.offsetHeight
           : window.innerHeight;
 
-        // Hitung titik tengah kontainer
+        // Calculate container center point
         const centerX = containerWidth / 2;
         const centerY = containerHeight / 2;
 
-        // Mendefinisikan margin aman agar gambar tidak terlalu dekat tepi atau keluar
-        const padding = 50; // Jarak minimal dari tepi kontainer
-        const imageSize = 50; // Perkiraan ukuran gambar, sesuaikan jika gambar Anda lebih besar
+        // Define safe margins so images aren't too close to edges or out of bounds
+        const padding = 50; // Minimum distance from container edges
+        const imageSize = 50; // Estimated image size, adjust if your images are larger
 
-        // PERUBAHAN UTAMA DI SINI:
-        // Entrance animation - Mulai dari area tengah, dan menyebar lebih luas ke posisi acak.
+        // MAIN CHANGE HERE:
+        // Entrance animation - Start from center area, spread out wider to random positions.
         gsap.default.fromTo(
           images,
-          // FROM state (Mulai dari Area Tengah yang Sedikit Acak)
+          // FROM state (Start from slightly randomized center area)
           {
             opacity: 0,
             scale: 0.5,
-            // Beri sedikit keacakan pada titik awal di sekitar tengah
+            // Add slight randomness to starting points around center
             x: () => gsap.default.utils.random(centerX - 50, centerX + 50),
             y: () => gsap.default.utils.random(centerY - 50, centerY + 50),
           },
-          // TO state (Berakhir di Posisi Acak yang Lebih Menyebar)
+          // TO state (End at random positions spread wider)
           {
-            duration: 1.8, // Sedikit lebih lama untuk efek menyebar
+            duration: 1.8, // Slightly longer for spread effect
             opacity: 1,
             scale: 1,
-            // Tentukan posisi akhir secara acak di dalam rentang kontainer
-            // Menggunakan padding untuk memastikan gambar tidak keluar batas
+            // Define final position randomly within container bounds
+            // Using padding to ensure images don't go out of bounds
             x: () =>
               gsap.default.utils.random(
                 padding,
@@ -182,34 +182,34 @@ const Skills = () => {
                 padding,
                 containerHeight - imageSize - padding,
               ),
-            ease: "power2.out", // Ease yang berbeda bisa memberi kesan menyebar yang lebih halus
-            stagger: 0.15, // Sedikit lebih cepat untuk stagger agar tidak terlalu lambat menyebarnya
+            ease: "power2.out", // Different ease can give a smoother spread feel
+            stagger: 0.15, // Slightly faster stagger so spread isn't too slow
           },
         );
 
         images.forEach((img) => {
-          // Floating animation (Pergerakan) - Rentang pergerakan acak yang lebih besar
+          // Floating animation (Movement) - Larger random movement range
           gsap.default.to(img, {
-            x: "+=" + gsap.default.utils.random(-550, 350), // Rentang X lebih besar
-            y: "+=" + gsap.default.utils.random(-500, 300), // Rentang Y lebih besar
-            duration: gsap.default.utils.random(8, 16), // Durasi tetap atau sedikit lebih lama
+            x: "+=" + gsap.default.utils.random(-550, 350), // Wider X range
+            y: "+=" + gsap.default.utils.random(-500, 300), // Wider Y range
+            duration: gsap.default.utils.random(8, 16), // Fixed or slightly longer duration
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true,
           });
 
-          // Rotation animation - Rentang rotasi acak yang lebih besar
+          // Rotation animation - Larger random rotation range
           gsap.default.to(img, {
-            rotation: () => gsap.default.utils.random(-25, 25), // Rentang rotasi lebih besar
+            rotation: () => gsap.default.utils.random(-25, 25), // Larger rotation range
             duration: gsap.default.utils.random(5, 80),
             ease: "power1.inOut",
             repeat: -1,
             yoyo: true,
           });
 
-          // Pulse scale effect - Rentang skala pulse sedikit lebih besar
+          // Pulse scale effect - Slightly larger pulse scale range
           gsap.default.to(img, {
-            scale: () => gsap.default.utils.random(0.8, 1.2), // Rentang skala pulse lebih besar
+            scale: () => gsap.default.utils.random(0.8, 1.2), // Larger pulse scale range
             duration: gsap.default.utils.random(3, 5),
             ease: "sine.inOut",
             repeat: -1,
@@ -293,7 +293,7 @@ const Skills = () => {
       {/* Floating Skills Icons Section */}
       <div className="skillIcon">
         <h1 className="lead">Technologies I Use</h1>
-        {/* Pastikan #container memiliki position: relative dan tinggi yang cukup */}
+        {/* Ensure #container has position: relative and sufficient height */}
         <div id="container" ref={containerRef}>
           {skillsData.map((skill, index) => (
             <img
@@ -303,7 +303,7 @@ const Skills = () => {
               data-info={skill.info}
               className="floating-image"
               onClick={() => handleImageClick(skill)}
-              style={{ opacity: 0, display: "block" }} // Pastikan initial state adalah tersembunyi
+              style={{ opacity: 0, display: "block" }} // Ensure initial state is hidden
             />
           ))}
 

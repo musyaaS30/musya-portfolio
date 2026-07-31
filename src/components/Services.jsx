@@ -45,9 +45,9 @@ const Services = () => {
   ];
 
   const handleServiceClick = (serviceTitle) => {
-    // Handle service click - bisa untuk navigation atau modal
+    // Handle service click - can be used for navigation or modal
     console.log(`Service clicked: ${serviceTitle}`);
-    // Contoh: navigate to service details page
+    // Example: navigate to service details page
     // navigate(`/services/${serviceTitle.toLowerCase().replace(/\s+/g, '-')}`);
   };
 

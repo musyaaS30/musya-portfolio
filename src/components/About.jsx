@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import AnimatedBorder from "./ui/AnimatedBorder";
+import SwipeCardDeck from "./ui/SwipeCardDeck";
 import designImage from "/assets/img/ilustration/designImage.webp";
 import codeImage from "/assets/img/ilustration/codeImage.webp";
 import performanceImage from "/assets/img/ilustration/performanceImage.webp";
@@ -92,7 +93,7 @@ const About = () => {
       });
     }, observerOptions);
 
-    // Observe semua text sections
+    // Observe all text sections
     const textSections = [
       headlineRef.current,
       leadRef.current,
@@ -185,26 +186,47 @@ const About = () => {
           </div>
         </div>
 
-        {/* Skills Grid - Section 5 */}
+        {/* Skills - Section 5 */}
         <div
           ref={skillsRef}
           data-section="skills"
           className={`skills-wrap section-step ${visibleSections.skills ? "visible" : ""
             }`}
         >
-          <div className="row justify-content-center g-4">
-            {skills.map((skill, index) => (
-              <div key={index} className="col-6 col-md-4 col-lg-3">
-                <div className="skill-item relative group">
+          {/* MOBILE: Swipe Card Deck */}
+          <div className="d-md-none">
+            <SwipeCardDeck
+              items={skills}
+              threshold={100}
+              renderItem={(skill) => (
+                <div className="skill-item relative">
                   <AnimatedBorder />
                   <div className="relative z-10">
-                    <img className="w-50 object-cover aspect-square mb-3" src={skill.image} alt={skill.title} />
-                    <h3>{skill.title}</h3>
-                    <p>{skill.description}</p>
+                      <img className="w-50 object-cover aspect-square mb-3" src={skill.image} alt={skill.title} />
+                      <h3>{skill.title}</h3>
+                      <p>{skill.description}</p>
+                    </div>
+                </div>
+              )}
+            />
+          </div>
+
+          {/* DESKTOP: Grid */}
+          <div className="d-none d-md-block">
+            <div className="row justify-content-center g-4">
+              {skills.map((skill, index) => (
+                <div key={index} className="col-6 col-md-4 col-lg-3">
+                  <div className="skill-item relative group">
+                    <AnimatedBorder />
+                    <div className="relative z-10">
+                      <img className="w-50 object-cover aspect-square mb-3" src={skill.image} alt={skill.title} />
+                      <h3>{skill.title}</h3>
+                      <p>{skill.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
