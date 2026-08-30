@@ -28,27 +28,11 @@ function hexToRgb(hex) {
   };
 }
 
-// Detect dark mode from system preference or stored preference
-const getInitialDarkMode = () => {
-  if (typeof window === 'undefined') return false;
-  
-  // Check localStorage first - default ke false jika tidak ada
-  const stored = localStorage.getItem('darkMode');
-  if (stored !== null) {
-    return stored === 'true';
-  }
-  
-  // Default ke light mode pertama kali
-  return false;
-};
-
 const DotGrid = ({
   dotSize = 16,
   gap = 32,
   baseColor = "#eaeaea", // Soft gray untuk light mode
   activeColor = "#777777",
-  darkModeBaseColor = '#1e1b4b',   // Dark mode base color
-  darkModeActiveColor = '#00d084', // Dark mode active color
   proximity = 150,
   speedTrigger = 100,
   shockRadius = 250,
@@ -56,8 +40,6 @@ const DotGrid = ({
   maxSpeed = 5000,
   resistance = 750,
   returnDuration = 1.5,
-  autoDetectDarkMode = true, // Automatically detect dark mode
-  forceDarkMode = null, // Force dark mode (overrides auto-detection)
   className = '',
   style
 }) => {
@@ -75,100 +57,14 @@ const DotGrid = ({
     lastY: 0
   });
 
-  // State untuk dark mode detection
-  const [isDarkMode, setIsDarkMode] = useState(false); // Default false (light mode)
-  const [isReady, setIsReady] = useState(false); // Flag untuk komponen siap
+  const [isReady, setIsReady] = useState(false);
 
-  // Initialize on component mount
   useEffect(() => {
-    // Set default ke light mode dulu
-    setIsDarkMode(false);
-    
-    // Setelah render pertama, cek preferensi
-    setTimeout(() => {
-      if (forceDarkMode !== null) {
-        setIsDarkMode(forceDarkMode);
-      } else if (autoDetectDarkMode) {
-        const stored = localStorage.getItem('darkMode');
-        if (stored !== null) {
-          setIsDarkMode(stored === 'true');
-        } else {
-          // Jika tidak ada preference di localStorage, cek system preference
-          const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          setIsDarkMode(systemDark);
-        }
-      }
-      setIsReady(true);
-    }, 100);
-  }, [autoDetectDarkMode, forceDarkMode]);
+    setIsReady(true);
+  }, []);
 
-  // Auto-detect dark mode changes from system
-  useEffect(() => {
-    if (!autoDetectDarkMode || forceDarkMode !== null || !isReady) return;
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    const handleChange = (e) => {
-      // Only update if no preference is stored in localStorage
-      if (localStorage.getItem('darkMode') === null) {
-        setIsDarkMode(e.matches);
-      }
-    };
-
-    // Listen for system dark mode changes
-    mediaQuery.addEventListener('change', handleChange);
-    
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
-  }, [autoDetectDarkMode, forceDarkMode, isReady]);
-
-  // Listen for dark mode changes from localStorage
-  useEffect(() => {
-    if (!autoDetectDarkMode || forceDarkMode !== null || !isReady) return;
-
-    const handleStorageChange = (e) => {
-      if (e.key === 'darkMode') {
-        setIsDarkMode(e.newValue === 'true');
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [autoDetectDarkMode, forceDarkMode, isReady]);
-
-  // Watch for body class changes (if using class-based dark mode)
-  useEffect(() => {
-    if (!autoDetectDarkMode || forceDarkMode !== null || !isReady) return;
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const isDark = document.body.classList.contains('dark-mode');
-          setIsDarkMode(isDark);
-        }
-      });
-    });
-
-    observer.observe(document.body, { attributes: true });
-    
-    return () => observer.disconnect();
-  }, [autoDetectDarkMode, forceDarkMode, isReady]);
-
-  // Calculate effective colors based on dark mode
-  const effectiveBaseColor = useMemo(() => {
-    return isDarkMode ? darkModeBaseColor : baseColor;
-  }, [isDarkMode, baseColor, darkModeBaseColor]);
-
-  const effectiveActiveColor = useMemo(() => {
-    return isDarkMode ? darkModeActiveColor : activeColor;
-  }, [isDarkMode, activeColor, darkModeActiveColor]);
-
-  const baseRgb = useMemo(() => hexToRgb(effectiveBaseColor), [effectiveBaseColor]);
-  const activeRgb = useMemo(() => hexToRgb(effectiveActiveColor), [effectiveActiveColor]);
+  const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
+  const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
 
   const circlePath = useMemo(() => {
     if (typeof window === 'undefined' || !window.Path2D) return null;
@@ -239,7 +135,7 @@ const DotGrid = ({
         const dy = dot.cy - py;
         const dsq = dx * dx + dy * dy;
 
-        let style = effectiveBaseColor;
+        let style = baseColor;
         if (dsq <= proxSq) {
           const dist = Math.sqrt(dsq);
           const t = 1 - dist / proximity;
@@ -261,7 +157,7 @@ const DotGrid = ({
 
     draw();
     return () => cancelAnimationFrame(rafId);
-  }, [proximity, effectiveBaseColor, effectiveActiveColor, baseRgb, activeRgb, circlePath, isReady]);
+  }, [proximity, baseColor, activeColor, baseRgb, activeRgb, circlePath, isReady]);
 
   useEffect(() => {
     if (!isReady) return;

@@ -2,10 +2,11 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
-import './styles/main.css'
-import './styles/darkMode.css'
-import './styles/skillsIcon.css'
 import Resumepage from './pages/Resumepage'
+import LiquidBackground from './components/ui/LiquidBackground'
+import './styles/main.css'
+import './styles/skillsIcon.css'
+import './styles/liquidGlass.css'
 
 function App() {
   useEffect(() => {
@@ -23,10 +24,13 @@ function App() {
 
   return (
     <Router>
+      {/* Ambient Liquid Glass Floating Glow Background */}
+      <LiquidBackground />
+
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home"  element={<Home />} />
-        <Route path="/resume"  element={<Resumepage />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/resume" element={<Resumepage />} />
         
         {/* Catch all undefined routes - Show 404 */}
         <Route path="*" element={<NotFound />} />

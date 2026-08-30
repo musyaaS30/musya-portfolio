@@ -9,21 +9,20 @@
   z-index: 9999;
 }
 
-
-/* Dark Mode State */
+/* Dark Mode State - Obsidian Liquid Glass Environment */
 .dark-mode {
-  --background-color: #0e0e0e;
-  --default-color: #dcdcdc;
+  --background-color: #090c13;
+  --default-color: #d1d5db;
   --heading-color: #ffffff;
   --accent-color: #00d084;
-  --surface-color: #1a1a1a;
+  --surface-color: rgba(20, 26, 38, 0.65);
   --contrast-color: #ffffff;
 
   /* Nav Colors */
-  --nav-color: #dcdcdc;
+  --nav-color: #d1d5db;
   --nav-hover-color: #ffffff;
-  --nav-mobile-background-color: #111111;
-  --nav-dropdown-background-color: #1b1b1b;
-  --nav-dropdown-color: #bbbbbb;
+  --nav-mobile-background-color: #0e131f;
+  --nav-dropdown-background-color: #141b29;
+  --nav-dropdown-color: #9ca3af;
   --nav-dropdown-hover-color: #00d084;
 }

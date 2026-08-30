@@ -1,288 +1,402 @@
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
-import Switch from "./ui/Switch";
+"use client";
 
-const NAV_LINKS = [
-  { label: "Home", href: "/home" },
-  { label: "About", href: "#about" },
-  { label: "Resume", href: "/resume" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { LayoutGroup } from "framer-motion";
+import {
+  Home,
+  User,
+  FileText,
+  Briefcase,
+  Layers,
+  Mail,
+  ChevronDown,
+  Check,
+  Sparkles,
+} from "lucide-react";
+import {
+  NotchLeftWing,
+  NotchRightWing,
+  NotchCornerLeftWing,
+  NotchCornerRightWing,
+  NotchItem,
+} from "./ui/adaptive-notch-navigation-bar";
+import { cn } from "@/lib/utils";
+
+const NAV_ITEMS = [
+  { id: "home", label: "Home", href: "/home", icon: Home },
+  { id: "about", label: "About", href: "#about", icon: User },
+  { id: "resume", label: "Resume", href: "/resume", icon: FileText },
+  { id: "portfolio", label: "Portfolio", href: "#portfolio", icon: Briefcase },
+  { id: "services", label: "Services", href: "#services", icon: Layers },
+  { id: "contact", label: "Contact", href: "#contact", icon: Mail },
 ];
 
-/* --- Small inline icons (no external icon dependency needed) --- */
-const IconMenu = ({ open }) => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-    {open ? (
-      <>
-        <line x1="6" y1="6" x2="18" y2="18" />
-        <line x1="18" y1="6" x2="6" y2="18" />
-      </>
-    ) : (
-      <>
-        <line x1="4" y1="7" x2="20" y2="7" />
-        <line x1="4" y1="12" x2="20" y2="12" />
-        <line x1="4" y1="17" x2="20" y2="17" />
-      </>
-    )}
-  </svg>
-);
-
-const IconHome = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 11.5 12 4l9 7.5" />
-    <path d="M5.5 10v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9" />
-  </svg>
-);
-
-const IconSettings = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="3.2" />
-    <path d="M19.4 13a7.7 7.7 0 0 0 0-2l2-1.5-2-3.4-2.3.9a7.6 7.6 0 0 0-1.7-1L15 3h-4l-.4 2.4a7.6 7.6 0 0 0-1.7 1l-2.3-.9-2 3.4L6.6 11a7.7 7.7 0 0 0 0 2l-2 1.5 2 3.4 2.3-.9c.5.4 1.1.75 1.7 1L10 21h4l.4-2.4c.6-.25 1.2-.6 1.7-1l2.3.9 2-3.4-2-1.5Z" />
-  </svg>
-);
-
 const Header = () => {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState("/home");
-  const { isDarkMode, toggleDarkMode } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Sync activeHref with current route & hash
-  useEffect(() => {
-    const path = location.pathname;
-    if (path === "/resume") {
-      setActiveHref("/resume");
-    } else if (path === "/home") {
-      setActiveHref(location.hash || "/home");
+  const currentRouteId = useMemo(() => {
+    if (location.pathname === "/resume") return "resume";
+    if (location.hash) {
+      const hashId = location.hash.replace("#", "");
+      if (NAV_ITEMS.some((item) => item.id === hashId)) return hashId;
     }
+    return "home";
   }, [location.pathname, location.hash]);
 
-  const toggleMobileNav = () => {
-    setIsSettingsOpen(false);
-    setIsMobileNavOpen((prev) => !prev);
-  };
+  const [activeId, setActiveId] = useState(currentRouteId);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleSettings = () => {
-    setIsMobileNavOpen(false);
-    setIsSettingsOpen((prev) => !prev);
-  };
+  // Sync with route navigation and scroll spy
+  useEffect(() => {
+    if (location.pathname === "/resume") {
+      return;
+    }
 
-  const handleNavLinkClick = (e, href) => {
-    e.preventDefault();
-    if (href.startsWith("#")) {
-      if (location.pathname !== "/home") {
-        navigate("/home", { state: { scrollTo: href.substring(1) } });
-      } else {
-        const targetId = href.substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth" });
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 220;
+      const sections = ["contact", "services", "portfolio", "about"];
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el && scrollPosition >= el.offsetTop) {
+          setActiveId(sectionId);
+          return;
         }
       }
-    } else if (href.startsWith("/")) {
-      navigate(href);
+
+      if (window.scrollY < 250) {
+        setActiveId("home");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
+
+  const effectiveActiveId =
+    location.pathname === "/resume" ? "resume" : activeId;
+
+  const handleSelectNav = useCallback(
+    (id) => {
+      setActiveId(id);
+      setIsDropdownOpen(false);
+
+      const item = NAV_ITEMS.find((n) => n.id === id);
+      if (!item) return;
+
+      if (item.href.startsWith("#")) {
+        if (location.pathname !== "/home") {
+          navigate("/home", { state: { scrollTo: item.id } });
+        } else {
+          const el = document.getElementById(item.id);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      } else if (item.href.startsWith("/")) {
+        navigate(item.href);
+        if (item.id === "home") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+    },
+    [location.pathname, navigate]
+  );
+
+  // Close dropdown on outside click or Escape
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      const notchContainer = document.getElementById("notch-mobile-nav");
+      if (notchContainer && !notchContainer.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key === "Escape") setIsDropdownOpen(false);
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
     }
-    setActiveHref(href);
-    setIsMobileNavOpen(false);
-    setIsSettingsOpen(false);
-  };
-
-  // Close mobile sheets when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const dock = document.querySelector("#mobile-dock");
-      const sheet = document.querySelector("#mobile-sheet");
-      if (
-        (isMobileNavOpen || isSettingsOpen) &&
-        dock &&
-        !dock.contains(event.target) &&
-        (!sheet || !sheet.contains(event.target))
-      ) {
-        setIsMobileNavOpen(false);
-        setIsSettingsOpen(false);
-      }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
     };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isMobileNavOpen, isSettingsOpen]);
+  }, [isDropdownOpen]);
 
-  // Escape key closes any open sheet
-  useEffect(() => {
-    const handleEscapeKey = (event) => {
-      if (event.key === "Escape") {
-        setIsMobileNavOpen(false);
-        setIsSettingsOpen(false);
-      }
-    };
-    document.addEventListener("keydown", handleEscapeKey);
-    return () => document.removeEventListener("keydown", handleEscapeKey);
-  }, []);
+  const activeItem = useMemo(
+    () => NAV_ITEMS.find((n) => n.id === effectiveActiveId) || NAV_ITEMS[0],
+    [effectiveActiveId]
+  );
 
   return (
     <>
-      {/* ============ DESKTOP: Glassmorphism navbar di tengah atas ============ */}
-      <header className="hidden md:flex fixed top-6 inset-x-0 z-50 justify-center px-4">
-        <nav className="flex items-center text-white gap-8 px-6 py-3 rounded-full bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+      {/* ========================================================================= */}
+      {/* 1. DESKTOP VIEW (>= 1280px / xl): SLEEK OBSIDIAN NOTCH SYSTEM             */}
+      {/* ========================================================================= */}
+      <div className="hidden xl:block pointer-events-none fixed top-0 inset-x-0 z-50">
+        {/* 1.1 Left Logo Notch */}
+        <aside
+          aria-label="Brand logo notch"
+          className={cn(
+            "pointer-events-auto absolute left-0 top-0 z-50 h-11 px-5 select-none",
+            "flex items-center rounded-br-[24px]",
+            "bg-zinc-950/92 text-white backdrop-blur-2xl border-b border-r border-zinc-800/80 shadow-[0_12px_35px_rgba(0,0,0,0.3)]",
+            "transition-colors duration-300"
+          )}
+        >
           <a
             href="/home"
-            onClick={(e) => handleNavLinkClick(e, "/home")}
-            className="text-lg font-semibold tracking-tight text-neutral-900 dark:text-white whitespace-nowrap no-underline hover:no-underline"
+            onClick={(e) => {
+              e.preventDefault();
+              handleSelectNav("home");
+            }}
+            className="flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
           >
-            Musyahadat
+            <div className="flex size-6 items-center justify-center rounded-lg bg-[var(--accent-color)] text-black">
+              <Sparkles className="size-3.5" />
+            </div>
+            <span>Musyahadat</span>
           </a>
 
-          <ul className="flex items-center m-0 p-0 gap-1">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={(e) => handleNavLinkClick(e, link.href)}
-                  className={`relative p-2 text-sm rounded-full transition-all duration-200 no-underline hover:no-underline
-                    ${
-                      activeHref === link.href
-                        ? "text-neutral-900 dark:text-white bg-white/30 dark:bg-black/20 shadow-sm"
-                        : "text-neutral-900 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-white/20 dark:hover:bg-white/5"
-                    }`}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Notch Wings */}
+          <NotchRightWing
+            position="top"
+            className="text-zinc-950/92 dark:text-zinc-950/92 transition-colors duration-300"
+          />
+          <NotchCornerLeftWing
+            position="top"
+            className="text-zinc-950/92 dark:text-zinc-950/92 transition-colors duration-300"
+          />
+        </aside>
 
-          <div className="pl-4 border-l border-white/20 dark:border-white/10">
-            <Switch isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
-          </div>
-        </nav>
-      </header>
+        {/* 1.2 Center Navigation Notch */}
+        <header
+          role="tablist"
+          aria-orientation="horizontal"
+          className={cn(
+            "pointer-events-auto absolute left-1/2 -translate-x-1/2 top-0 z-50 h-11 px-3 select-none",
+            "flex items-center rounded-b-[24px]",
+            "bg-zinc-950/92 text-white backdrop-blur-2xl border-b border-x border-zinc-800/80 shadow-[0_12px_35px_rgba(0,0,0,0.3)]",
+            "transition-colors duration-300"
+          )}
+        >
+          <NotchLeftWing
+            position="top"
+            className="text-zinc-950/92 dark:text-zinc-950/92 transition-colors duration-300"
+          />
+          <NotchRightWing
+            position="top"
+            className="text-zinc-950/92 dark:text-zinc-950/92 transition-colors duration-300"
+          />
 
-      {/* ============ MOBILE: Bottom dock dengan glassmorphism ============ */}
-      <div className="md:hidden fixed bottom-5 inset-x-0 z-50 flex justify-center px-6">
-        <div id="mobile-dock" className="relative w-full max-w-xs">
-          {/* Glassmorphism bottom bar */}
-          <div className="flex items-center justify-around h-16 px-4 rounded-full bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNavLinkClick(e, "/home");
-              }}
-              aria-label="Home"
-              className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors p-2"
-            >
-              <IconHome />
-            </button>
-
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleMobileNav();
-              }}
-              aria-label={isMobileNavOpen ? "Close menu" : "Open menu"}
-              className="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors p-2"
-            >
-              <IconMenu open={isMobileNavOpen} />
-            </button>
-
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleSettings();
-              }}
-              aria-label="Settings"
-              className={`transition-colors p-2 ${
-                isSettingsOpen ? "text-neutral-900 dark:text-white" : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
-              }`}
-            >
-              <IconSettings />
-            </button>
-          </div>
-        </div>
-
-        {/* Slide-up menu sheet */}
-        {isMobileNavOpen && (
-          <div
-            id="mobile-sheet"
-            className="fixed bottom-24 w-80 rounded-2xl p-3
-                       bg-black/30 text-white backdrop-blur-xl
-                       border border-white/20 dark:border-white/10 shadow-2xl
-                       animate-[fadeIn_0.15s_ease-out]"
-          >
-            <ul className="flex flex-col gap-1">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavLinkClick(e, link.href)}
-                    className={`block px-4 py-3 rounded-xl text-sm transition-all duration-200 no-underline hover:no-underline
-                      ${
-                        activeHref === link.href
-                          ? "text-neutral-900 dark:text-white bg-neutral-100 dark:bg-white/10"
-                          : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5"
-                      }`}
-                  >
-                    {link.label}
-                  </a>
-                </li>
+          <LayoutGroup id="desktop-notch-nav">
+            <div className="flex items-center gap-1">
+              {NAV_ITEMS.map((item) => (
+                <NotchItem
+                  key={item.id}
+                  id={item.id}
+                  label={item.label}
+                  icon={item.icon}
+                  isActive={item.id === effectiveActiveId}
+                  onSelect={handleSelectNav}
+                  className={cn(
+                    "h-8 px-3 text-xs font-semibold rounded-full transition-colors",
+                    item.id === effectiveActiveId
+                      ? "text-white font-bold"
+                      : "text-zinc-400 hover:text-white"
+                  )}
+                />
               ))}
-            </ul>
-          </div>
-        )}
+            </div>
+          </LayoutGroup>
+        </header>
 
-        {/* Settings sheet (dark mode toggle) */}
-        {isSettingsOpen && (
-          <div
-            id="mobile-sheet"
-            className="fixed bottom-24 w-80 rounded-2xl p-4
-                       bg-black/30 backdrop-blur-xl
-                       border border-white/20 dark:border-white/10 shadow-2xl
-                       flex items-center justify-between
-                       animate-[fadeIn_0.15s_ease-out]"
-          >
-            <span className="text-sm text-neutral-700 dark:text-neutral-200 font-medium">Dark Mode</span>
-            <Switch isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
+        {/* 1.3 Right Action Notch */}
+        <aside
+          aria-label="User actions notch"
+          className={cn(
+            "pointer-events-auto absolute right-0 top-0 z-50 h-11 px-5 select-none",
+            "flex items-center gap-3 rounded-bl-[24px]",
+            "bg-zinc-950/92 text-white backdrop-blur-2xl border-b border-l border-zinc-800/80 shadow-[0_12px_35px_rgba(0,0,0,0.3)]",
+            "transition-colors duration-300"
+          )}
+        >
+          <NotchLeftWing
+            position="top"
+            className="text-zinc-950/92 dark:text-zinc-950/92 transition-colors duration-300"
+          />
+          <NotchCornerRightWing
+            position="top"
+            className="text-zinc-950/92 dark:text-zinc-950/92 transition-colors duration-300"
+          />
+
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/musyaaS30"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+              className="flex items-center gap-2 px-3 text-l font-semibold text-white hover:border-white/30 transition-all duration-200 no-underline shadow-xs"
+            >
+              <svg
+                viewBox="0 0 1024 1024"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="size-5.5 fill-current"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                  transform="scale(64)"
+                  fill="currentColor"
+                />
+              </svg>
+            </a>
           </div>
-        )}
+        </aside>
+
       </div>
 
-      {/* CSS Animation & Link Reset */}
-      <style>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        /* Reset default link styles */
-        a {
-          text-decoration: none !important;
-          color: inherit !important;
-        }
-        
-        a:hover {
-          text-decoration: none !important;
-        }
-        
-        a:visited {
-          color: inherit !important;
-        }
-        
-        a:active {
-          color: inherit !important;
-        }
-      `}</style>
+      {/* ========================================================================= */}
+      {/* 2. TABLET & MOBILE VIEW (< 1280px): COMPACT SLEEK DARK NOTCH ISLAND       */}
+      {/* ========================================================================= */}
+      <div className="xl:hidden pointer-events-none fixed top-0 inset-x-0 z-50 flex justify-center px-4">
+        <div
+          id="notch-mobile-nav"
+          className={cn(
+            "pointer-events-auto relative z-50 flex flex-col select-none",
+            "rounded-b-[24px] px-4",
+            "bg-zinc-950/95 text-white backdrop-blur-2xl border-b border-x border-zinc-800/80 shadow-[0_14px_40px_rgba(0,0,0,0.4)]",
+            "transition-all duration-300 w-auto max-w-[95vw]"
+          )}
+        >
+          {/* Notch Wings */}
+          <NotchLeftWing
+            position="top"
+            className="text-zinc-950/95 dark:text-zinc-950/95 transition-colors duration-300"
+          />
+          <NotchRightWing
+            position="top"
+            className="text-zinc-950/95 dark:text-zinc-950/95 transition-colors duration-300"
+          />
+
+          {/* Unified Horizontal Bar */}
+          <div className="flex h-11 items-center justify-between gap-3 sm:gap-5">
+            {/* Left Brand Slot */}
+            <a
+              href="/home"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSelectNav("home");
+              }}
+              className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white no-underline"
+            >
+              <div className="flex size-5.5 items-center justify-center rounded-md bg-[var(--accent-color)] text-black">
+                <Sparkles className="size-3" />
+              </div>
+              <span className="hidden sm:inline">Musyahadat</span>
+            </a>
+
+            {/* Center Dropdown Trigger */}
+            <button
+              type="button"
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="listbox"
+              aria-label="Toggle navigation menu"
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              className={cn(
+                "flex h-8 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold outline-none transition-colors",
+                " hover:bg-white/15 text-white"
+              )}
+            >
+              {activeItem?.icon && (
+                <activeItem.icon className="size-3.5 text-[var(--accent-color)]" />
+              )}
+              <span>{activeItem?.label}</span>
+              <ChevronDown
+                className={cn(
+                  "size-3.5 transition-transform duration-200 text-zinc-400",
+                  isDropdownOpen && "rotate-180"
+                )}
+              />
+            </button>
+
+            {/* Right Action Slot */}
+            <div className="flex items-center pl-1 border-l border-zinc-800">
+              <a
+                href="https://github.com/musyaaS30"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Profile"
+                className="flex items-center gap-1.5 px-2.5 text-[11px] font-semibold text-white transition-colors no-underline"
+              >
+                <svg
+                  viewBox="0 0 1024 1024"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-4.5 fill-current"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"
+                    transform="scale(64)"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Expandable Dropdown Drawer */}
+          <div
+            role="listbox"
+            aria-label="Navigation options"
+            className={cn(
+              "grid transition-[grid-template-rows,opacity] duration-200 ease-out w-full",
+              isDropdownOpen
+                ? "grid-rows-[1fr] opacity-100 pb-2.5 pt-1"
+                : "grid-rows-[0fr] opacity-0 pointer-events-none"
+            )}
+          >
+            <div className="overflow-hidden">
+              <div className="flex flex-col gap-1 pt-1">
+                {NAV_ITEMS.map((item) => {
+                  const Icon = item.icon;
+                  const isSelected = item.id === effectiveActiveId;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      role="option"
+                      aria-selected={isSelected}
+                      onClick={() => handleSelectNav(item.id)}
+                      className={cn(
+                        "flex w-full items-center justify-between gap-2.5 rounded-xl px-3 py-2 text-left text-xs font-medium outline-none transition-colors",
+                        isSelected
+                          ? "bg-[var(--accent-color)] font-bold text-black shadow-xs"
+                          : "text-zinc-300 hover:bg-white/10 hover:text-white"
+                      )}
+                    >
+                      <div className="flex items-center gap-2">
+                        {Icon && <Icon className="size-3.5 shrink-0" />}
+                        <span>{item.label}</span>
+                      </div>
+                      {isSelected && <Check className="size-3.5" />}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
