@@ -38,6 +38,7 @@ const Header = () => {
 
   const currentRouteId = useMemo(() => {
     if (location.pathname === "/resume") return "resume";
+    if (location.pathname === "/portfolio") return "portfolio";
     if (location.hash) {
       const hashId = location.hash.replace("#", "");
       if (NAV_ITEMS.some((item) => item.id === hashId)) return hashId;
@@ -50,7 +51,7 @@ const Header = () => {
 
   // Sync with route navigation and scroll spy
   useEffect(() => {
-    if (location.pathname === "/resume") {
+    if (location.pathname === "/resume" || location.pathname === "/portfolio") {
       return;
     }
 
@@ -76,7 +77,11 @@ const Header = () => {
   }, [location.pathname]);
 
   const effectiveActiveId =
-    location.pathname === "/resume" ? "resume" : activeId;
+    location.pathname === "/resume"
+      ? "resume"
+      : location.pathname === "/portfolio"
+      ? "portfolio"
+      : activeId;
 
   const handleSelectNav = useCallback(
     (id) => {

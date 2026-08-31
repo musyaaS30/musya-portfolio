@@ -102,7 +102,7 @@ const FAQ = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -6, scale: 0.98 }}
                       transition={{ duration: 0.22, ease: "easeOut" }}
-                      className="mt-3 ml-6 sm:ml-12 md:ml-16 max-w-md sm:max-w-lg p-5 sm:p-6 !rounded-3xl bg-[#07ffa4] text-neutral-950 shadow-md border-0"
+                      className="mt-3 ml-6 sm:ml-12 md:ml-16 max-w-md sm:max-w-lg p-5 sm:p-6 !rounded-3xl  bg-[#07ffa4] text-neutral-950 shadow-md border-0"
                       style={{ borderRadius: "28px" }}
                     >
                       <p className="text-sm sm:text-base font-medium leading-relaxed m-0 text-slate-950">

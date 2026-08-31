@@ -34,17 +34,17 @@ const Hero = () => {
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row align-items-center gx-5 gy-5">
           <div className="col-lg-7">
-            <div className="intro" data-aos="fade-right" data-aos-delay="150">
-              <div className="eyebrow d-inline-flex align-items-center gap-2 mb-3">
+            <div className="intro text-start" data-aos="fade-right" data-aos-delay="150">
+              <div className="eyebrow d-inline-flex align-items-center gap-2 mb-3 text-start">
                 <span className="dot"></span>
                 <span className="text font-semibold tracking-wide">Hello</span>
               </div>
 
-              <h1 className="display-heading mb-3">
+              <h1 className="display-heading mb-3 text-start">
                 Crafting creative digital projects with passion and innovation
               </h1>
 
-              <p className="lead mb-4">
+              <p className="lead mb-4 text-start">
                 I'm a student at SMKN 12 Jakarta, focused on programming, web
                 development, and technology. I'm always striving to learn new
                 things, create useful applications, and develop creative ideas
@@ -52,22 +52,22 @@ const Hero = () => {
               </p>
 
               <div
-                className="cta-group d-flex flex-wrap align-items-center gap-3"
-                data-aos="zoom-in"
+                className="cta-group d-flex flex-wrap align-items-center justify-content-start gap-3 text-start"
+                data-aos="fade-right"
                 data-aos-delay="250"
               >
-                <a href="#portfolio" className="btn btn-ghost">
+                <a href="#portfolio" className="btn btn-ghost d-inline-flex align-items-center justify-content-start text-start">
                   View Selected Work
                   <i className="bi bi-arrow-right ms-2"></i>
                 </a>
-                <a href="#about" className="btn link-underline">
+                <a href="#about" className="btn link-underline d-inline-flex align-items-center justify-content-start text-start">
                   Learn About Me
                   <i className="bi bi-person ms-2"></i>
                 </a>
               </div>
 
               <div
-                className="meta mt-4 d-flex flex-wrap align-items-center gap-3"
+                className="meta mt-4 d-flex flex-wrap align-items-center justify-content-start gap-3 text-start"
                 data-aos="fade-up"
                 data-aos-delay="300"
               >
@@ -90,9 +90,9 @@ const Hero = () => {
               data-aos-delay="200"
             >
               <img
-                src="assets/img/profile/profile.jpg"
+                src="assets/img/profile/profile2.jpg"
                 alt="Profile Portrait"
-                className="img-fluid portrait-img"
+                className="img-fluid aspect-square object-cover portrait-img"
               />
               <figcaption className="visually-hidden">
                 Minimal portrait preview

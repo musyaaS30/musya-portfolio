@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Resumepage from './pages/Resumepage'
+import PortfolioPage from './pages/PortfolioPage'
 import LiquidBackground from './components/ui/LiquidBackground'
 import './styles/main.css'
 import './styles/skillsIcon.css'
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />} />
         <Route path="/resume" element={<Resumepage />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
         
         {/* Catch all undefined routes - Show 404 */}
         <Route path="*" element={<NotFound />} />

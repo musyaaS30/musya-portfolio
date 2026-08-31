@@ -5,7 +5,7 @@ import Hero from '../components/Hero'
 import About from '../components/About'
 import Skills from '../components/Skills'
 import Resume from '../components/Resume'
-import Portfolio from '../components/Portfolio'
+import PortfolioCta from '../components/PortfolioCta'
 import Testimonials from '../components/Testimonials'
 import Services from '../components/Services'
 import FAQ from '../components/FAQ'
@@ -37,7 +37,7 @@ const Home = () => {
         <About />
         <Skills />
         {/* <Resume /> */}
-        <Portfolio />
+        <PortfolioCta />
         {/* <Testimonials /> */}
         {/* <Services /> */}
         <FAQ />
