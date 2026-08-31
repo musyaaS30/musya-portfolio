@@ -12,7 +12,6 @@ import FAQ from '../components/FAQ'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import ScrollTop from '../components/ScrollTop'
-import Preloader from '../components/Preloader'
 import CustomCursor from '../components/CustomCursor'
 
 const Home = () => {
@@ -29,7 +28,6 @@ const Home = () => {
   }, [location.state?.scrollTo]);
   return (
     <div className="index-page">
-      <Preloader />
       <CustomCursor />
       <Header />
       <main className="main">

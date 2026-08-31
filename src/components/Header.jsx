@@ -1,8 +1,6 @@
-"use client";
-
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutGroup } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import {
   Home,
   User,
@@ -143,7 +141,12 @@ const Header = () => {
       {/* ========================================================================= */}
       {/* 1. DESKTOP VIEW (>= 1280px / xl): SLEEK OBSIDIAN NOTCH SYSTEM             */}
       {/* ========================================================================= */}
-      <div className="hidden xl:block pointer-events-none fixed top-0 inset-x-0 z-50">
+      <motion.div
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="hidden xl:block pointer-events-none fixed top-0 inset-x-0 z-50"
+      >
         {/* 1.1 Left Logo Notch */}
         <aside
           aria-label="Brand logo notch"
@@ -162,10 +165,10 @@ const Header = () => {
             }}
             className="flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
           >
-            <div className="flex size-6 items-center justify-center rounded-lg bg-[var(--accent-color)] text-black">
-              <Sparkles className="size-3.5" />
+            <div className="flex size-7 items-center justify-center text-black">
+              <img src="/musyaLogo.png" alt="" />
             </div>
-            <span>Musyahadat</span>
+            {/* <span>Musyahadat</span> */}
           </a>
 
           {/* Notch Wings */}
@@ -266,12 +269,17 @@ const Header = () => {
           </div>
         </aside>
 
-      </div>
+      </motion.div>
 
       {/* ========================================================================= */}
       {/* 2. TABLET & MOBILE VIEW (< 1280px): COMPACT SLEEK DARK NOTCH ISLAND       */}
       {/* ========================================================================= */}
-      <div className="xl:hidden pointer-events-none fixed top-0 inset-x-0 z-50 flex justify-center px-4">
+      <motion.div
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="xl:hidden pointer-events-none fixed top-0 inset-x-0 z-50 flex justify-center px-4"
+      >
         <div
           id="notch-mobile-nav"
           className={cn(
@@ -401,7 +409,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
