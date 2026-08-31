@@ -41,7 +41,6 @@ const About = () => {
       image: codeImage,
       delay: 180,
     },
-
     {
       icon: "bi-speedometer2",
       title: "Performance Optimization",
@@ -115,10 +114,9 @@ const About = () => {
     <section id="about" className="about section">
       {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
-        <h2>About</h2>
+        <h2>About Me</h2>
         <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
+          Get to know more about my background, philosophy, and approach to development
         </p>
       </div>
 
@@ -131,8 +129,9 @@ const About = () => {
               <h2
                 ref={headlineRef}
                 data-section="headline"
-                className={`headline text-step ${visibleSections.headline ? "visible" : ""
-                  }`}
+                className={`headline text-step ${
+                  visibleSections.headline ? "visible" : ""
+                }`}
               >
                 Hi, I'm Musyahadat Safitrah — a passionate student & aspiring
                 developer crafting creative digital projects
@@ -142,30 +141,32 @@ const About = () => {
               <p
                 ref={paragraphRef}
                 data-section="paragraph"
-                className={`text-step ${visibleSections.paragraph ? "visible" : ""
-                  }`}
+                className={`text-step ${
+                  visibleSections.paragraph ? "visible" : ""
+                }`}
               >
                 I believe that every line of code is not just an instruction for
-                a computer, but also a work of art that can be useful for
-                others.
+                a computer, but also a work of art that can be genuinely useful and
+                delightful for others.
               </p>
 
               {/* CTA - Section 4 */}
               <div
                 ref={ctaRef}
                 data-section="cta"
-                className={`cta-group text-step ${visibleSections.cta ? "visible" : ""
-                  }`}
+                className={`cta-group text-step ${
+                  visibleSections.cta ? "visible" : ""
+                }`}
               >
                 <a href="#portfolio" className="btn btn-ghost">
-                  View My Work <i className="bi bi-arrow-down"></i>
+                  View My Work <i className="bi bi-arrow-down ms-1"></i>
                 </a>
                 <a
                   href="/assets/cv/CV-Musyahadat.d5b6fc64ef903fc5a2a596809e6850c7.pdf"
                   download
                   className="btn link-underline"
                 >
-                  Download CV <i className="bi bi-download"></i>
+                  Download CV <i className="bi bi-download ms-1"></i>
                 </a>
               </div>
             </div>
@@ -190,8 +191,9 @@ const About = () => {
         <div
           ref={skillsRef}
           data-section="skills"
-          className={`skills-wrap section-step ${visibleSections.skills ? "visible" : ""
-            }`}
+          className={`skills-wrap section-step ${
+            visibleSections.skills ? "visible" : ""
+          }`}
         >
           {/* MOBILE: Swipe Card Deck */}
           <div className="d-md-none">
@@ -200,12 +202,16 @@ const About = () => {
               threshold={100}
               renderItem={(skill) => (
                 <div className="skill-item relative">
-                  <AnimatedBorder />
-                  <div className="relative z-10">
-                      <img className="w-50 object-cover aspect-square mb-3" src={skill.image} alt={skill.title} />
-                      <h3>{skill.title}</h3>
-                      <p>{skill.description}</p>
-                    </div>
+                  {/* <AnimatedBorder /> */}
+                  <div className="relative z-10 text-center flex flex-col items-center">
+                    <img
+                      className="w-20 object-cover aspect-square mb-3"
+                      src={skill.image}
+                      alt={skill.title}
+                    />
+                    <h3>{skill.title}</h3>
+                    <p>{skill.description}</p>
+                  </div>
                 </div>
               )}
             />
@@ -215,11 +221,15 @@ const About = () => {
           <div className="d-none d-md-block">
             <div className="row justify-content-center g-4">
               {skills.map((skill, index) => (
-                <div key={index} className="col-6 col-md-4 col-lg-3">
+                <div key={index} className="col-md-4">
                   <div className="skill-item relative group">
-                    <AnimatedBorder />
-                    <div className="relative z-10">
-                      <img className="w-50 object-cover aspect-square mb-3" src={skill.image} alt={skill.title} />
+                    {/* <AnimatedBorder /> */}
+                    <div className="relative z-10 text-center flex flex-col items-center">
+                      <img
+                        className="w-20 object-cover aspect-square mb-3"
+                        src={skill.image}
+                        alt={skill.title}
+                      />
                       <h3>{skill.title}</h3>
                       <p>{skill.description}</p>
                     </div>
@@ -234,8 +244,9 @@ const About = () => {
         <blockquote
           ref={quoteRef}
           data-section="quote"
-          className={`personal-quote section-step ${visibleSections.quote ? "visible" : ""
-            }`}
+          className={`personal-quote section-step ${
+            visibleSections.quote ? "visible" : ""
+          }`}
         >
           <p>
             "Building clean and meaningful experiences through thoughtful code
@@ -247,8 +258,9 @@ const About = () => {
         <div
           ref={factsRef}
           data-section="facts"
-          className={`facts-wrap section-step ${visibleSections.facts ? "visible" : ""
-            }`}
+          className={`facts-wrap section-step ${
+            visibleSections.facts ? "visible" : ""
+          }`}
         >
           <div className="row g-3 justify-content-center">
             {funFacts.map((fact, index) => (

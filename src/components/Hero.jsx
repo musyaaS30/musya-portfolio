@@ -1,10 +1,7 @@
 "use client";
 import DotGrid from "../../public/assets/elements/dotGrid";
-import { useTheme } from "../context/ThemeContext";
 
 const Hero = () => {
-  const { isDarkMode } = useTheme();
-
   return (
     <section
       id="hero"
@@ -15,11 +12,8 @@ const Hero = () => {
         <DotGrid
           dotSize={4}
           gap={28}
-          forceDarkMode={isDarkMode}
           baseColor="#eaeaea"
           activeColor="#777777"
-          darkModeBaseColor="#333333"
-          darkModeActiveColor="#00d084"
           proximity={100}
           speedTrigger={50}
           shockStrength={1.5}
@@ -43,7 +37,7 @@ const Hero = () => {
             <div className="intro" data-aos="fade-right" data-aos-delay="150">
               <div className="eyebrow d-inline-flex align-items-center gap-2 mb-3">
                 <span className="dot"></span>
-                <span className="text">Hello</span>
+                <span className="text font-semibold tracking-wide">Hello</span>
               </div>
 
               <h1 className="display-heading mb-3">
@@ -66,24 +60,24 @@ const Hero = () => {
                   View Selected Work
                   <i className="bi bi-arrow-right ms-2"></i>
                 </a>
-                <a href="#contact" className="btn link-underline">
-                  Get in touch
-                  <i className="bi bi-envelope ms-2"></i>
+                <a href="#about" className="btn link-underline">
+                  Learn About Me
+                  <i className="bi bi-person ms-2"></i>
                 </a>
               </div>
 
               <div
-                className="meta mt-4 d-flex flex-wrap align-items-center gap-4"
+                className="meta mt-4 d-flex flex-wrap align-items-center gap-3"
                 data-aos="fade-up"
                 data-aos-delay="300"
               >
                 <div className="meta-item d-flex align-items-center gap-2">
-                  <i className="bi bi-geo-alt"></i>
+                  <i className="bi bi-geo-alt text-[var(--accent-color)]"></i>
                   <span>Jakarta, Indonesia</span>
                 </div>
                 <div className="meta-item d-flex align-items-center gap-2">
-                  <i className="bi bi-circle"></i>
-                  <span>Currently Learning</span>
+                  <i className="bi bi-mortarboard text-[var(--accent-color)]"></i>
+                  <span>Software Engineering Student</span>
                 </div>
               </div>
             </div>
@@ -109,7 +103,10 @@ const Hero = () => {
                 data-aos="zoom-in"
                 data-aos-delay="300"
               >
-                <span>11th grade vocational school students</span>
+                <span className="d-flex align-items-center justify-content-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#00d084] animate-pulse"></span>
+                  11th Grade Vocational Student • SMKN 12
+                </span>
               </div>
             </figure>
           </div>

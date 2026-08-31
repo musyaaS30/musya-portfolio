@@ -1,15 +1,16 @@
-/* NotFound Page with Floating Particles */
+/* NotFound Page with Liquid Glass */
 .not-found-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background: var(--background-color);
   color: var(--default-color);
-  font-family: 'Arial', sans-serif;
+  font-family: var(--default-font, sans-serif);
   overflow: hidden;
   margin: 0;
+  padding: 20px;
 }
 
 .not-found-content {
@@ -17,22 +18,29 @@
   width: 600px;
   max-width: 100%;
   margin: 20px;
-  background: var(--surface-color);
+  background: var(--liquid-glass-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--liquid-glass-border);
   padding: 60px 40px;
   text-align: center;
-  box-shadow: -10px 10px 67px -12px rgba(0,0,0,0.2);
+  box-shadow: var(--liquid-glass-shadow);
   opacity: 0;
-  animation: apparition 0.8s 1.2s cubic-bezier(0.39,0.575,0.28,0.995) forwards;
-  border-radius: 12px;
+  animation: apparition 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border-radius: 28px;
   z-index: 10;
 }
 
+.dark-mode .not-found-content {
+  background: rgba(20, 26, 38, 0.75);
+  box-shadow: var(--liquid-glass-shadow-hover);
+}
+
 .not-found-content p {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   margin-top: 0;
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.1rem;
-  color: var(--default-color);
+  margin-bottom: 0.8rem;
+  color: var(--heading-color);
 }
 
 .not-found-content p:last-child {
@@ -42,28 +50,38 @@
 .not-found-content strong {
   color: var(--accent-color);
   font-weight: 900;
+  font-size: 2.5rem;
+  display: inline-block;
+  margin-right: 8px;
+  letter-spacing: -0.02em;
 }
 
 .not-found-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   margin-top: 2rem;
-  padding: 0.75rem 2rem;
-  border: 3px solid var(--accent-color);
-  background: transparent;
-  font-size: 1.1rem;
-  color: var(--accent-color);
+  padding: 12px 28px;
+  border: 1px solid var(--liquid-glass-border);
+  background: var(--accent-color);
+  font-size: 1rem;
+  color: var(--contrast-color, #ffffff) !important;
   text-decoration: none;
   cursor: pointer;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 208, 132, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark-mode .not-found-button {
+  color: #000000 !important;
 }
 
 .not-found-button:hover {
-  background: var(--accent-color);
-  color: var(--contrast-color);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 34px rgba(0, 208, 132, 0.45);
 }
 
 /* Particle Styles */
@@ -72,88 +90,49 @@
   display: block;
   pointer-events: none;
   color: var(--accent-color);
-  opacity: 0.3;
+  opacity: 0.18;
   font-weight: 900;
   z-index: 1;
 }
-
-/* Generate random animations for each particle */
-.particle:nth-child(1) { top: 5%; left: 10%; font-size: 18px; filter: blur(0.02px); animation: 25s float infinite; }
-.particle:nth-child(2) { top: 15%; left: 85%; font-size: 24px; filter: blur(0.04px); animation: 32s floatReverse infinite; }
-.particle:nth-child(3) { top: 25%; left: 25%; font-size: 16px; filter: blur(0.06px); animation: 28s float2 infinite; }
-.particle:nth-child(4) { top: 35%; left: 65%; font-size: 22px; filter: blur(0.08px); animation: 35s floatReverse2 infinite; }
-.particle:nth-child(5) { top: 45%; left: 15%; font-size: 20px; filter: blur(0.1px); animation: 30s float infinite; }
-.particle:nth-child(6) { top: 55%; left: 75%; font-size: 26px; filter: blur(0.12px); animation: 27s floatReverse infinite; }
-.particle:nth-child(7) { top: 65%; left: 35%; font-size: 18px; filter: blur(0.14px); animation: 33s float2 infinite; }
-.particle:nth-child(8) { top: 75%; left: 55%; font-size: 24px; filter: blur(0.16px); animation: 29s floatReverse2 infinite; }
-.particle:nth-child(9) { top: 85%; left: 5%; font-size: 22px; filter: blur(0.18px); animation: 31s float infinite; }
-.particle:nth-child(10) { top: 10%; left: 45%; font-size: 20px; filter: blur(0.2px); animation: 26s floatReverse infinite; }
-
-/* Continue this pattern for all 80 particles... */
-/* For brevity, I'll show a function to generate these in JS instead */
 
 /* Animations */
 @keyframes apparition {
   from {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(60px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(180px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(120px); }
 }
 
 @keyframes floatReverse {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-180px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-120px); }
 }
 
 @keyframes float2 {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(28px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(30px); }
 }
 
 @keyframes floatReverse2 {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-28px);
-  }
-}
-
-/* Dark Mode Support */
-.dark-mode .not-found-container {
-  --background-color: #1a1a1a;
-  --surface-color: #2d2d2d;
-  --default-color: #cccccc;
-  --accent-color: #ffffff;
-  --contrast-color: #000000;
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .not-found-content {
-    padding: 40px 20px;
+    padding: 40px 24px;
     margin: 15px;
+    border-radius: 20px;
   }
   
   .not-found-content p {
@@ -161,7 +140,7 @@
   }
   
   .not-found-button {
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
+    padding: 10px 22px;
+    font-size: 0.95rem;
   }
 }
