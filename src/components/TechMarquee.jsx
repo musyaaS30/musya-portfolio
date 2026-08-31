@@ -6,7 +6,7 @@ const skillsData = [
     id: "react",
     name: "React.js",
     category: "Frontend Library",
-    src: "/assets/img/skills/react-logo.png",
+    src: "/assets/img/skills/react.svg",
     alt: "React",
     description:
       "Building reactive, high-performance, and modular user interfaces with modern React hooks, state management, and component architecture.",
@@ -16,7 +16,7 @@ const skillsData = [
     id: "javascript",
     name: "JavaScript",
     category: "Core Language",
-    src: "/assets/img/skills/js-logo.png",
+    src: "/assets/img/skills/javascript.svg",
     alt: "JavaScript",
     description:
       "Developing interactive web experiences, DOM manipulation, asynchronous logic, and modern ES6+ application workflows.",
@@ -26,7 +26,7 @@ const skillsData = [
     id: "tailwind",
     name: "Tailwind CSS",
     category: "Styling Framework",
-    src: "/assets/img/skills/tailwind-logo.png",
+    src: "/assets/img/skills/tailwind-css.svg",
     alt: "Tailwind CSS",
     description:
       "Crafting rapid, pixel-perfect, responsive layouts and aesthetic designs with utility-first modern CSS architecture.",
@@ -36,7 +36,7 @@ const skillsData = [
     id: "nodejs",
     name: "Node.js",
     category: "Backend Runtime",
-    src: "/assets/img/skills/node-logo.png",
+    src: "/assets/img/skills/nodejs.svg",
     alt: "Node.js",
     description:
       "Building scalable REST APIs, asynchronous server applications, and backend microservices using Node.js.",
@@ -46,7 +46,7 @@ const skillsData = [
     id: "html5",
     name: "HTML5",
     category: "Structure & Markup",
-    src: "/assets/img/skills/html-logo.png",
+    src: "/assets/img/skills/html5.svg",
     alt: "HTML5",
     description:
       "Structuring semantic, accessible, SEO-optimized, and clean web layouts adhering to modern web standards.",
@@ -56,7 +56,7 @@ const skillsData = [
     id: "css3",
     name: "CSS3",
     category: "Stylesheet & Animations",
-    src: "/assets/img/skills/css-logo.png",
+    src: "/assets/img/skills/css-new.svg",
     alt: "CSS3",
     description:
       "Creating modern responsive layouts with Flexbox, CSS Grid, custom properties, and fluid keyframe animations.",
@@ -66,7 +66,7 @@ const skillsData = [
     id: "mysql",
     name: "MySQL",
     category: "Relational Database",
-    src: "/assets/img/skills/mysql-logo.png",
+    src: "/assets/img/skills/mysql-wordmark.svg",
     alt: "MySQL",
     description:
       "Designing structured relational database schemas, handling complex queries, joins, and optimizing database performance.",
@@ -76,7 +76,7 @@ const skillsData = [
     id: "cloudflare",
     name: "Cloudflare",
     category: "CDN & Security",
-    src: "/assets/img/skills/cloudflare-logo.png",
+    src: "/assets/img/skills/cloudflare.svg",
     alt: "Cloudflare",
     description:
       "Deploying global CDN caching, SSL encryption, DNS routing, and DDoS protection for web infrastructure.",
@@ -86,7 +86,7 @@ const skillsData = [
     id: "github",
     name: "GitHub",
     category: "Version Control",
-    src: "/assets/img/skills/github-logo.png",
+    src: "/assets/img/skills/github-mono.svg",
     alt: "GitHub",
     description:
       "Managing source code version control, collaborative branch workflows, review processes, and continuous integration.",
@@ -96,17 +96,57 @@ const skillsData = [
     id: "claude",
     name: "Claude AI",
     category: "AI Productivity",
-    src: "/assets/img/skills/claude-logo.png",
+    src: "/assets/img/skills/claude-ai.svg",
     alt: "Claude AI",
     description:
       "Leveraging advanced AI assistance for intelligent code refactoring, problem solving, debugging, and productivity enhancement.",
     tag: "AI Assistant",
   },
+  {
+    id: "nestjs",
+    name: "NestJS",
+    category: "Backend Framework",
+    src: "/assets/img/skills/nestjs.svg",
+    alt: "NestJS",
+    description:
+      "Building scalable, modular server-side applications with TypeScript-first architecture, dependency injection, and enterprise-grade design patterns.",
+    tag: "Backend",
+  },
+  {
+    id: "firebase",
+    name: "Firebase",
+    category: "Backend as a Service",
+    src: "/assets/img/skills/firebase.svg",
+    alt: "Firebase",
+    description:
+      "Implementing real-time databases, authentication, cloud functions, and hosting for rapid full-stack application development.",
+    tag: "BaaS",
+  },
+  {
+    id: "redis",
+    name: "Redis",
+    category: "Database",
+    src: "/assets/img/skills/redis.svg",
+    alt: "Redis",
+    description:
+      "Utilizing in-memory data structures for caching, session management, and high-performance pub/sub messaging systems.",
+    tag: "Caching",
+  },
+  {
+    id: "tanstack",
+    name: "TanStack Query",
+    category: "State Management",
+    src: "/assets/img/skills/tanstack.svg",
+    alt: "TanStack",
+    description:
+      "Managing server state, caching, and data synchronization efficiently with declarative queries and mutations in React.",
+    tag: "Data Fetching",
+  },
 ];
 
 // Row 1 skills and Row 2 skills (with shifted order for rich visual variety)
-const row1Skills = skillsData.slice(0, 5); // React, JavaScript, Tailwind, Node.js, HTML5
-const row2Skills = skillsData.slice(5, 10); // CSS3, MySQL, Cloudflare, GitHub, Claude AI
+const row1Skills = skillsData.slice(0, 7); // React, JavaScript, Tailwind, Node.js, HTML5
+const row2Skills = skillsData.slice(7, 14); // CSS3, MySQL, Cloudflare, GitHub, Claude AI
 
 // Quadruple the arrays to guarantee an unbroken seamless loop across any screen resolution
 const marqueeRow1 = [
