@@ -8,7 +8,7 @@ const Hero = () => {
       className="hero section position-relative overflow-hidden"
     >
       {/* Background Gradient Overlay */}
-      <div className="dot-grid-background">
+      <div className="dot-grid-background hidden lg:block">
         <DotGrid
           dotSize={4}
           gap={28}

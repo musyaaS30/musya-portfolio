@@ -17,35 +17,35 @@ const FileUi = ({
       id: 5,
       title: "Antarbang",
       tag: "Web • Platform",
-      image: "/assets/img/portfolio/antarbang.png",
+      image: "/assets/img/portfolio/antarbang.webp",
       delay: "0s",
     },
     {
       id: 4,
       title: "Login Zeta",
       tag: "CSS • Auth UI",
-      image: "/assets/img/portfolio/loginZeta.png",
+      image: "/assets/img/portfolio/loginZeta.webp",
       delay: "0.03s",
     },
     {
       id: 3,
       title: "Paskibra Web",
       tag: "React • Portal",
-      image: "/assets/img/portfolio/paskibsmas12-mockup.png",
+      image: "/assets/img/portfolio/paskibsmas12-mockup.webp",
       delay: "0.07s",
     },
     {
       id: 2,
       title: "Hiraku App",
       tag: "Next.js • Mobile UI",
-      image: "/assets/img/portfolio/Hiraku.png",
+      image: "/assets/img/portfolio/Hiraku.webp",
       delay: "0.12s",
     },
     {
       id: 1,
       title: "SemudahApp",
       tag: "React • Web App",
-      image: "/assets/img/portfolio/semudahApp-mockup.png",
+      image: "/assets/img/portfolio/semudahApp-mockup.webp",
       delay: "0.18s",
     },
   ];
@@ -72,7 +72,7 @@ const FileUi = ({
       handleCardClick(e);
     } else {
       if (navigateTo) {
-        navigate(navigateTo);
+        navigate(navigateTo);0, 255, 157, 0.4
       }
     }
   };
@@ -125,7 +125,6 @@ const FileUi = ({
               {/* Project Title and Tech Tag */}
               <div className="file-info">
                 <div className="file-text">{card.title}</div>
-                <div className="file-tag">{card.tag}</div>
               </div>
             </div>
           ))}
@@ -311,24 +310,6 @@ const StyledWrapper = styled.div`
     opacity: 0;
     transform: translateY(5px);
     transition: all 0.35s ease 0.45s;
-  }
-
-  .file-tag {
-    background: rgba(0, 208, 132, 0.25);
-    border: 1px solid rgba(0, 208, 132, 0.5);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    color: var(--accent-color, #00d084);
-    font-family: "Inter", -apple-system, sans-serif;
-    font-size: 8px;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    transform: translateX(10px);
-    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
   }
 
   .folder-card.is-open .folder-container .file-text,

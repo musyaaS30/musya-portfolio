@@ -5,7 +5,7 @@ const Portfolio = () => {
   const portfolioData = [
     {
       id: 1,
-      image: "/assets/img/portfolio/semudahApp-mockup.png",
+      image: "/assets/img/portfolio/semudahApp-mockup.webp",
       title: "SemudahApp",
       stack: "React | React Router | Firebase | Cloudflare | TailwindCSS",
       description: "A comprehensive modern web application built for seamless productivity and utility services.",
@@ -14,7 +14,7 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      image: "/assets/img/portfolio/Hiraku.png",
+      image: "/assets/img/portfolio/Hiraku.webp",
       title: "Hiraku",
       stack: "NextJS | Framer Motion | Firebase | TailwindCSS | Lenis",
       description: "Interactive mobile-responsive portfolio application with fluid kinetic typography and micro-interactions.",
@@ -23,7 +23,7 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      image: "/assets/img/portfolio/paskibsmas12-mockup.png",
+      image: "/assets/img/portfolio/paskibsmas12-mockup.webp",
       title: "Paskibra Smas 12",
       stack: "React | React Router | AOS | Vercel | TailwindCSS",
       description: "Official school organization web portal featuring dynamic event schedules and recruitment modules.",
@@ -32,7 +32,7 @@ const Portfolio = () => {
     },
     {
       id: 4,
-      image: "/assets/img/portfolio/loginZeta.png",
+      image: "/assets/img/portfolio/loginZeta.webp",
       title: "Login & Register UI Design",
       stack: "JavaScript | HTML5 | CSS3 | Vercel",
       description: "Clean, responsive authentication interface design with fluid feedback and modern input styling.",
