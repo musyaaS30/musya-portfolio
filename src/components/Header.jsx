@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
-import { LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import {
   Home,
   User,
@@ -175,18 +175,51 @@ const Header = () => {
             }}
             title={isNotHome ? "Back to Home" : "Musyahadat"}
             aria-label={isNotHome ? "Back to Home" : "Musyahadat Home"}
-            className="group flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
+            className="group relative flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
           >
-            <div className="flex size-7 items-center justify-center text-white">
-              {isNotHome ? (
-                <Home className="size-5 text-white stroke-[2.2] transition-transform duration-200 group-hover:scale-110" />
-              ) : (
-                <img
-                  src="/musyaLogo.png"
-                  alt="Musyahadat"
-                  className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
+            <div className="relative flex size-7 items-center justify-center text-white">
+              {/* Ambient light ripple on state transition */}
+              <AnimatePresence>
+                <motion.span
+                  key={isNotHome ? "glow-home" : "glow-logo"}
+                  initial={{ opacity: 0.5, scale: 0.7 }}
+                  animate={{ opacity: 0, scale: 1.5 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  className="pointer-events-none absolute inset-0 rounded-full bg-white/20 blur-[5px]"
                 />
-              )}
+              </AnimatePresence>
+
+              {/* Seamless morph animation between Logo and Home Icon */}
+              <AnimatePresence initial={false}>
+                {isNotHome ? (
+                  <motion.div
+                    key="desktop-home-icon"
+                    initial={{ opacity: 0, scale: 0.4, rotate: -60, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 0.4, rotate: 60, filter: "blur(4px)" }}
+                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <Home className="size-5.5 text-white stroke-[2.2] transition-transform duration-200 group-hover:scale-110" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="desktop-musya-logo"
+                    initial={{ opacity: 0, scale: 0.4, rotate: 60, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 0.4, rotate: -60, filter: "blur(4px)" }}
+                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <img
+                      src="/musyaLogo.png"
+                      alt="Musyahadat"
+                      className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             {/* <span>Musyahadat</span> */}
           </a>
@@ -334,20 +367,51 @@ const Header = () => {
             >
               <div
                 className={cn(
-                  "flex size-5.5 items-center justify-center rounded-md transition-all duration-200",
+                  "relative flex size-5.5 items-center justify-center rounded-md transition-colors duration-300 overflow-hidden",
                   isNotHome
                     ? "bg-white/15 text-white group-hover:bg-white/25"
                     : "bg-[var(--accent-color)] text-black"
                 )}
               >
-                {isNotHome ? (
-                  <Home className="size-3.5 text-white stroke-[2.2]" />
-                ) : (
-                  <Sparkles className="size-3" />
-                )}
+                <AnimatePresence initial={false}>
+                  {isNotHome ? (
+                    <motion.div
+                      key="mob-home"
+                      initial={{ opacity: 0, scale: 0.4, rotate: -45 }}
+                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                      exit={{ opacity: 0, scale: 0.4, rotate: 45 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <Home className="size-3.5 text-white stroke-[2.2]" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="mob-sparkles"
+                      initial={{ opacity: 0, scale: 0.4, rotate: 45 }}
+                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                      exit={{ opacity: 0, scale: 0.4, rotate: -45 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <Sparkles className="size-3" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <span className="hidden sm:inline">
-                {isNotHome ? "Home" : "Musyahadat"}
+              <span className="hidden sm:inline relative overflow-hidden">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={isNotHome ? "lbl-home" : "lbl-musya"}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                    className="inline-block"
+                  >
+                    {isNotHome ? "Home" : "Musyahadat"}
+                  </motion.span>
+                </AnimatePresence>
               </span>
             </a>
 
