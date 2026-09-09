@@ -111,7 +111,7 @@ const Hero = () => {
               <img
                 ref={imgRef}
                 src="/assets/img/profile/profile2.jpg"
-                alt="Musyahadat Safitrah"
+                alt="Musyahadat"
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none scale-105 transition-transform duration-300 ease-out"
                 onError={(e) => {
                   if (!e.target.dataset.fallback) {
