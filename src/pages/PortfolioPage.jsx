@@ -20,16 +20,6 @@ const PortfolioPage = () => {
         {/* Page Hero Header */}
         <section className="portfolio-hero-banner py-12 px-4">
           <div className="container" data-aos="fade-up">
-            {/* Breadcrumb & Back Link */}
-            <div className="mb-6">
-              <Link
-                to="/home"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--default-color)] hover:text-[var(--accent-color)] transition-colors no-underline"
-              >
-                <i className="bi bi-arrow-left"></i>
-                <span>Back to Home</span>
-              </Link>
-            </div>
 
             {/* Title Section */}
             <div className="max-w-3xl">

@@ -1004,14 +1004,16 @@ body,
     inset 0 -1px 2px rgba(255, 255, 255, 0.15);
 }
 
-.sphere-red-gradient {
-  background: radial-gradient(circle at 35% 35%, #ff5238 0%, #ff1744 55%, #b7001c 100%);
-  box-shadow: 0 20px 45px rgba(255, 23, 68, 0.35);
+/* Hijau (#00d084) */
+.sphere-green-gradient {
+  background: radial-gradient(circle at 35% 35%, #3dfdb1 0%, #00d084 55%, #006b43 100%);
+  box-shadow: 0 20px 45px rgba(0, 208, 132, 0.35);
 }
 
+/* Kombinasi Cyan (#06b6d4) & Blue (#3b82f6) */
 .sphere-blue-gradient {
-  background: radial-gradient(circle at 35% 35%, #448aff 0%, #2979ff 55%, #1565c0 100%);
-  box-shadow: 0 20px 45px rgba(41, 121, 255, 0.35);
+  background: radial-gradient(circle at 35% 35%, #06b6d4 0%, #3b82f6 55%, #1d4ed8 100%);
+  box-shadow: 0 20px 45px rgba(59, 130, 246, 0.35);
 }
 
 .contact-glass-card a,

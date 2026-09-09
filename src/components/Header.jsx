@@ -46,6 +46,8 @@ const Header = () => {
     return "home";
   }, [location.pathname, location.hash]);
 
+  const isNotHome = location.pathname !== "/" && location.pathname !== "/home";
+
   const [activeId, setActiveId] = useState(currentRouteId);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -171,10 +173,20 @@ const Header = () => {
               e.preventDefault();
               handleSelectNav("home");
             }}
-            className="flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
+            title={isNotHome ? "Back to Home" : "Musyahadat"}
+            aria-label={isNotHome ? "Back to Home" : "Musyahadat Home"}
+            className="group flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
           >
-            <div className="flex size-7 items-center justify-center text-black">
-              <img src="/musyaLogo.png" alt="" />
+            <div className="flex size-7 items-center justify-center text-white">
+              {isNotHome ? (
+                <Home className="size-5 text-white stroke-[2.2] transition-transform duration-200 group-hover:scale-110" />
+              ) : (
+                <img
+                  src="/musyaLogo.png"
+                  alt="Musyahadat"
+                  className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
+                />
+              )}
             </div>
             {/* <span>Musyahadat</span> */}
           </a>
@@ -316,12 +328,27 @@ const Header = () => {
                 e.preventDefault();
                 handleSelectNav("home");
               }}
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white no-underline"
+              title={isNotHome ? "Back to Home" : "Musyahadat"}
+              aria-label={isNotHome ? "Back to Home" : "Musyahadat Home"}
+              className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white no-underline group"
             >
-              <div className="flex size-5.5 items-center justify-center rounded-md bg-[var(--accent-color)] text-black">
-                <Sparkles className="size-3" />
+              <div
+                className={cn(
+                  "flex size-5.5 items-center justify-center rounded-md transition-all duration-200",
+                  isNotHome
+                    ? "bg-white/15 text-white group-hover:bg-white/25"
+                    : "bg-[var(--accent-color)] text-black"
+                )}
+              >
+                {isNotHome ? (
+                  <Home className="size-3.5 text-white stroke-[2.2]" />
+                ) : (
+                  <Sparkles className="size-3" />
+                )}
               </div>
-              <span className="hidden sm:inline">Musyahadat</span>
+              <span className="hidden sm:inline">
+                {isNotHome ? "Home" : "Musyahadat"}
+              </span>
             </a>
 
             {/* Center Dropdown Trigger */}

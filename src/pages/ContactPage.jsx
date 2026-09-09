@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ScrollTop from "../components/ScrollTop";
@@ -7,17 +6,10 @@ import CustomCursor from "../components/CustomCursor";
 
 const ContactPage = () => {
   const cardRef = useRef(null);
-  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText("mussforrttk@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   // 3D Tilt Effect on mouse move
   const handleCardMouseMove = (e) => {
@@ -126,16 +118,6 @@ const ContactPage = () => {
         {/* Page Hero Header */}
         <section className="contact-hero-banner py-8 sm:py-12 px-4">
           <div className="container mx-auto" data-aos="fade-up">
-            {/* Breadcrumb & Back Link */}
-            <div className="mb-6">
-              <Link
-                to="/home"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[var(--default-color)] hover:text-[var(--accent-color)] transition-colors no-underline"
-              >
-                <i className="bi bi-arrow-left"></i>
-                <span>Back to Home</span>
-              </Link>
-            </div>
 
             {/* Title Section */}
             <div className="max-w-2xl mx-auto text-center">
@@ -174,7 +156,7 @@ const ContactPage = () => {
             <div
               className="absolute -top-10 -left-8 sm:-top-14 sm:-left-12 md:-top-16 md:-left-16 
                          w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 
-                         rounded-full sphere-red-gradient animate-sphere-red pointer-events-none z-0"
+                         rounded-full sphere-green-gradient animate-sphere-red pointer-events-none z-0"
               aria-hidden="true"
             />
 
@@ -227,7 +209,7 @@ const ContactPage = () => {
 
                 {/* NFC Wave Symbol */}
                 <div
-                  className="flex items-center text-neutral-700 dark:text-neutral-200 opacity-90"
+                  className="flex items-center text-neutral-300 opacity-90"
                   title="Contactless Signal"
                 >
                   <svg
@@ -254,7 +236,7 @@ const ContactPage = () => {
                       href={item.url}
                       target={item.name === "Gmail" ? "_self" : "_blank"}
                       rel="noopener noreferrer"
-                      className="group/icon relative p-1.5 sm:p-2 !text-[#6b7280] hover:!text-neutral-900 dark:!text-neutral-400 dark:hover:!text-white !no-underline transition-all duration-200 ease-out hover:scale-125 hover:-translate-y-1 drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] cursor-pointer"
+                      className="group/icon relative p-1.5 sm:p-2 !text-neutral-400 hover:!text-neutral-900 !no-underline transition-all duration-200 ease-out hover:scale-125 hover:-translate-y-1 drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] cursor-pointer"
                       style={{ color: "#6b7280", textDecoration: "none" }}
                       title={item.name}
                       aria-label={item.name}
@@ -277,14 +259,14 @@ const ContactPage = () => {
                   <span className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-neutral-600 dark:text-neutral-400 font-bold block">
                     CARDHOLDER
                   </span>
-                  <span className="text-xs sm:text-sm md:text-base font-black text-neutral-900 dark:text-neutral-100 tracking-wider font-mono">
+                  <span className="text-xs sm:text-sm md:text-base font-black text-neutral-300 tracking-wider font-mono">
                     MUSYAHADAT
                   </span>
                 </div>
 
                 {/* Tulisan Musya pengganti logo VISA */}
                 <div className="text-right select-none">
-                  <span className="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-wider text-neutral-900 dark:text-neutral-100 font-sans drop-shadow-sm">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-wider text-neutral-300 font-sans drop-shadow-sm">
                     Musya
                   </span>
                 </div>
@@ -293,37 +275,7 @@ const ContactPage = () => {
           </div>
         </section>
 
-        {/* Additional Direct Email Copy Card */}
-        <section className="py-6 px-4">
-          <div className="container mx-auto max-w-md text-center" data-aos="fade-up" data-aos-delay="200">
-            <div className="p-4 sm:p-5 rounded-2xl bg-white/50 dark:bg-neutral-900/50 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-3 shadow-sm">
-              <div className="text-left truncate">
-                <span className="text-xs text-neutral-500 uppercase tracking-wider block font-mono font-semibold">
-                  Official Email
-                </span>
-                <span className="text-sm sm:text-base font-semibold text-neutral-800 dark:text-neutral-200 truncate">
-                  mussforrttk@gmail.com
-                </span>
-              </div>
-              <button
-                onClick={handleCopyEmail}
-                className="px-3.5 py-2 text-xs font-bold rounded-xl bg-[var(--accent-color)] text-neutral-900 hover:opacity-90 transition-opacity flex items-center gap-1.5 shrink-0 cursor-pointer border-0"
-              >
-                {copied ? (
-                  <>
-                    <i className="bi bi-check-lg"></i>
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <i className="bi bi-clipboard"></i>
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </section>
+        
       </main>
 
       <Footer />
