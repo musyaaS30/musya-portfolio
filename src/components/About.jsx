@@ -123,25 +123,8 @@ const About = () => {
       <div className="container">
         {/* Intro */}
         <div className="row align-items-center intro-wrap gy-5">
-          {/* Foto di Kiri */}
-          <div className="col-lg-5" data-aos="fade-right">
-            <figure className="profile-figure text-center text-lg-start">
-              <img
-                src="/assets/img/profile/profile.jpg"
-                alt="Musyahadat"
-                className="img-fluid profile-photo"
-                onError={(e) => {
-                  if (!e.target.dataset.fallback) {
-                    e.target.dataset.fallback = "true";
-                    e.target.src = "/assets/img/profile/profile2.jpg";
-                  }
-                }}
-              />
-            </figure>
-          </div>
-
-          {/* Teks di Kanan Foto */}
-          <div className="col-lg-7" data-aos="fade-left">
+          {/* Teks di Kiri */}
+          <div className="col-lg-7" data-aos="fade-right">
             <div className="intro-content text-center text-lg-start">
               {/* Headline - Section 1 */}
               <h2
@@ -188,6 +171,23 @@ const About = () => {
                 </a>
               </div>
             </div>
+          </div>
+
+          {/* Foto / Ilustrasi di Kanan */}
+          <div className="col-lg-5" data-aos="fade-left">
+            <figure className="profile-figure text-center text-lg-end">
+              <img
+                src="/assets/img/ilustration/cartoon.png"
+                alt="Musyahadat"
+                className="img-fluid max-w-[380px] sm:max-w-[420px] object-contain drop-shadow-md"
+                onError={(e) => {
+                  if (!e.target.dataset.fallback) {
+                    e.target.dataset.fallback = "true";
+                    e.target.src = "/assets/img/profile/profile2.jpg";
+                  }
+                }}
+              />
+            </figure>
           </div>
         </div>
 
