@@ -31,6 +31,8 @@ const NAV_ITEMS = [
   { id: "contact", label: "Contact", href: "/contact", icon: Mail },
 ];
 
+let lastRoutePath = null;
+
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,6 +49,40 @@ const Header = () => {
   }, [location.pathname, location.hash]);
 
   const isNotHome = location.pathname !== "/" && location.pathname !== "/home";
+
+  // Staged choreography: Halaman pindah -> Navbar turun (0 - 600ms) -> Icon berubah (600ms+)
+  const [iconState, setIconState] = useState(() => {
+    if (isNotHome) {
+      // If navigating between two non-home pages (e.g. portfolio -> contact), stay as home
+      if (lastRoutePath && lastRoutePath !== "/" && lastRoutePath !== "/home") {
+        return "home";
+      }
+      // Otherwise (from home or initial entry), start as logo so it can morph to home after navbar drops
+      return "logo";
+    }
+    // If returning to home from another page, start as home so it can morph back to logo
+    if (lastRoutePath && lastRoutePath !== "/" && lastRoutePath !== "/home") {
+      return "home";
+    }
+    return "logo";
+  });
+
+  useEffect(() => {
+    const targetState = isNotHome ? "home" : "logo";
+
+    if (iconState !== targetState) {
+      // Navbar drop animation takes 0.65s (ease [0.16, 1, 0.3, 1]).
+      // Trigger the morph at 650ms, right after the navbar completely settles!
+      const timer = setTimeout(() => {
+        setIconState(targetState);
+        lastRoutePath = location.pathname;
+      }, 650);
+
+      return () => clearTimeout(timer);
+    } else {
+      lastRoutePath = location.pathname;
+    }
+  }, [isNotHome, iconState, location.pathname]);
 
   const [activeId, setActiveId] = useState(currentRouteId);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -173,32 +209,32 @@ const Header = () => {
               e.preventDefault();
               handleSelectNav("home");
             }}
-            title={isNotHome ? "Back to Home" : "Musyahadat"}
-            aria-label={isNotHome ? "Back to Home" : "Musyahadat Home"}
+            title={iconState === "home" ? "Back to Home" : "Musyahadat"}
+            aria-label={iconState === "home" ? "Back to Home" : "Musyahadat Home"}
             className="group relative flex items-center gap-2 text-sm font-bold tracking-tight text-white no-underline hover:no-underline"
           >
             <div className="relative flex size-7 items-center justify-center text-white">
               {/* Ambient light ripple on state transition */}
               <AnimatePresence>
                 <motion.span
-                  key={isNotHome ? "glow-home" : "glow-logo"}
-                  initial={{ opacity: 0.5, scale: 0.7 }}
-                  animate={{ opacity: 0, scale: 1.5 }}
+                  key={iconState === "home" ? "glow-home" : "glow-logo"}
+                  initial={{ opacity: 0.65, scale: 0.6 }}
+                  animate={{ opacity: 0, scale: 1.7 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.45, ease: "easeOut" }}
-                  className="pointer-events-none absolute inset-0 rounded-full bg-white/20 blur-[5px]"
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="pointer-events-none absolute inset-0 rounded-full bg-white/25 blur-[6px]"
                 />
               </AnimatePresence>
 
               {/* Seamless morph animation between Logo and Home Icon */}
               <AnimatePresence initial={false}>
-                {isNotHome ? (
+                {iconState === "home" ? (
                   <motion.div
                     key="desktop-home-icon"
-                    initial={{ opacity: 0, scale: 0.4, rotate: -60, filter: "blur(4px)" }}
+                    initial={{ opacity: 0, scale: 0.35, rotate: -70, filter: "blur(4px)" }}
                     animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.4, rotate: 60, filter: "blur(4px)" }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, scale: 0.35, rotate: 70, filter: "blur(4px)" }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
                     <Home className="size-5.5 text-white stroke-[2.2] transition-transform duration-200 group-hover:scale-110" />
@@ -206,10 +242,10 @@ const Header = () => {
                 ) : (
                   <motion.div
                     key="desktop-musya-logo"
-                    initial={{ opacity: 0, scale: 0.4, rotate: 60, filter: "blur(4px)" }}
+                    initial={{ opacity: 0, scale: 0.35, rotate: 70, filter: "blur(4px)" }}
                     animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.4, rotate: -60, filter: "blur(4px)" }}
-                    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, scale: 0.35, rotate: -70, filter: "blur(4px)" }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
                     <img
@@ -361,26 +397,26 @@ const Header = () => {
                 e.preventDefault();
                 handleSelectNav("home");
               }}
-              title={isNotHome ? "Back to Home" : "Musyahadat"}
-              aria-label={isNotHome ? "Back to Home" : "Musyahadat Home"}
+              title={iconState === "home" ? "Back to Home" : "Musyahadat"}
+              aria-label={iconState === "home" ? "Back to Home" : "Musyahadat Home"}
               className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white no-underline group"
             >
               <div
                 className={cn(
-                  "relative flex size-5.5 items-center justify-center rounded-md transition-colors duration-300 overflow-hidden",
-                  isNotHome
+                  "relative flex size-5.5 items-center justify-center rounded-md transition-colors duration-400 overflow-hidden",
+                  iconState === "home"
                     ? "bg-white/15 text-white group-hover:bg-white/25"
                     : "bg-[var(--accent-color)] text-black"
                 )}
               >
                 <AnimatePresence initial={false}>
-                  {isNotHome ? (
+                  {iconState === "home" ? (
                     <motion.div
                       key="mob-home"
-                      initial={{ opacity: 0, scale: 0.4, rotate: -45 }}
+                      initial={{ opacity: 0, scale: 0.35, rotate: -60 }}
                       animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                      exit={{ opacity: 0, scale: 0.4, rotate: 45 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, scale: 0.35, rotate: 60 }}
+                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <Home className="size-3.5 text-white stroke-[2.2]" />
@@ -388,10 +424,10 @@ const Header = () => {
                   ) : (
                     <motion.div
                       key="mob-sparkles"
-                      initial={{ opacity: 0, scale: 0.4, rotate: 45 }}
+                      initial={{ opacity: 0, scale: 0.35, rotate: 60 }}
                       animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                      exit={{ opacity: 0, scale: 0.4, rotate: -45 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, scale: 0.35, rotate: -60 }}
+                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <Sparkles className="size-3" />
@@ -402,14 +438,14 @@ const Header = () => {
               <span className="hidden sm:inline relative overflow-hidden">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
-                    key={isNotHome ? "lbl-home" : "lbl-musya"}
-                    initial={{ opacity: 0, y: 5 }}
+                    key={iconState === "home" ? "lbl-home" : "lbl-musya"}
+                    initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    transition={{ duration: 0.22, ease: "easeOut" }}
-                    className="inline-block"
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.28, ease: "easeOut" }}
+                    className="inline-block font-bold"
                   >
-                    {isNotHome ? "Home" : "Musyahadat"}
+                    {iconState === "home" ? "Home" : "Musyahadat"}
                   </motion.span>
                 </AnimatePresence>
               </span>
