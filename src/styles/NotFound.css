@@ -70,7 +70,7 @@
   text-decoration: none;
   cursor: pointer;
   font-weight: 700;
-  border-radius: 14px;
+  border-radius: 9999px;
   box-shadow: 0 8px 24px rgba(0, 208, 132, 0.3);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }

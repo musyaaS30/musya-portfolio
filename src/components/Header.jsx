@@ -145,7 +145,7 @@ const Header = () => {
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden xl:block pointer-events-none fixed top-0 inset-x-0 z-50"
+        className="hidden xl:block pointer-events-none fixed top-0 border-t-5 border-zinc-950/92 inset-x-0 z-50"
       >
         {/* 1.1 Left Logo Notch */}
         <aside
@@ -391,7 +391,7 @@ const Header = () => {
                       aria-selected={isSelected}
                       onClick={() => handleSelectNav(item.id)}
                       className={cn(
-                        "flex w-full items-center justify-between gap-2.5 rounded-xl px-3 py-2 text-left text-xs font-medium outline-none transition-colors",
+                        "flex w-full items-center justify-between gap-2.5 rounded-full px-3 py-2 text-left text-xs font-medium outline-none transition-colors",
                         isSelected
                           ? "bg-[var(--accent-color)] font-bold text-black shadow-xs"
                           : "text-zinc-300 hover:bg-white/10 hover:text-white"

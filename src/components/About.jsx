@@ -121,10 +121,10 @@ const About = () => {
       </div>
 
       <div className="container">
-        {/* Intro + Photo */}
-        <div className="row align-items-center justify-content-between intro-wrap gy-5">
-          <div className="col-lg-7">
-            <div className="intro-content">
+        {/* Intro */}
+        <div className="row justify-content-center intro-wrap gy-5">
+          <div className="col-lg-9 col-xl-8">
+            <div className="intro-content text-center">
               {/* Headline - Section 1 */}
               <h2
                 ref={headlineRef}
@@ -133,7 +133,7 @@ const About = () => {
                   visibleSections.headline ? "visible" : ""
                 }`}
               >
-                Hi, I'm Musyahadat Safitrah — a passionate student & aspiring
+                Hi, I'm Musyahadat — a passionate student & aspiring
                 developer crafting creative digital projects
               </h2>
 
@@ -154,7 +154,7 @@ const About = () => {
               <div
                 ref={ctaRef}
                 data-section="cta"
-                className={`cta-group text-step ${
+                className={`cta-group text-step justify-content-center ${
                   visibleSections.cta ? "visible" : ""
                 }`}
               >
@@ -164,26 +164,12 @@ const About = () => {
                 <a
                   href="/assets/cv/CV-Musyahadat.d5b6fc64ef903fc5a2a596809e6850c7.pdf"
                   download
-                  className="btn link-underline"
+                  className="btn btn-ghost"
                 >
                   Download CV <i className="bi bi-download ms-1"></i>
                 </a>
               </div>
             </div>
-          </div>
-
-          <div className="col-lg-5">
-            <figure className="profile-figure text-center text-lg-end">
-              <img
-                src="/assets/img/profile/profile.jpg"
-                alt="Portrait of Musyahadat"
-                className="img-fluid profile-photo"
-                onError={(e) => {
-                  e.target.src =
-                    "https://via.placeholder.com/400x500/f8f9fa/6c757d?text=Profile+Image";
-                }}
-              />
-            </figure>
           </div>
         </div>
 

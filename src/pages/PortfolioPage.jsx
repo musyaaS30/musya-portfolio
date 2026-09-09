@@ -72,14 +72,14 @@ const PortfolioPage = () => {
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="mailto:musyahadat30@gmail.com"
-                  className="px-6 py-3 rounded-xl bg-[var(--accent-color)] text-black font-bold text-sm transition-colors hover:brightness-95 no-underline inline-flex items-center gap-2"
+                  className="px-6 py-3 rounded-full bg-[var(--accent-color)] text-black font-bold text-sm transition-colors hover:brightness-95 no-underline inline-flex items-center gap-2"
                 >
                   <i className="bi bi-envelope-fill"></i>
                   <span>Get in Touch</span>
                 </a>
                 <Link
                   to="/home"
-                  className="px-6 py-3 rounded-xl bg-[var(--liquid-glass-bg-subtle)] hover:border-[var(--accent-color)]/50 text-[var(--heading-color)] font-semibold text-sm transition-colors no-underline inline-flex items-center gap-2 border border-[var(--liquid-glass-border)]"
+                  className="px-6 py-3 rounded-full bg-[var(--liquid-glass-bg-subtle)] hover:border-[var(--accent-color)]/50 text-[var(--heading-color)] font-semibold text-sm transition-colors no-underline inline-flex items-center gap-2 border border-[var(--liquid-glass-border)]"
                 >
                   <span>Explore Overview</span>
                 </Link>

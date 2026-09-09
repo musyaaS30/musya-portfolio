@@ -305,7 +305,7 @@
 
 .tech-modal-btn {
   padding: 10px 22px;
-  border-radius: 12px;
+  border-radius: 9999px;
   background: var(--accent-color);
   color: var(--contrast-color, #ffffff);
   font-size: 0.88rem;

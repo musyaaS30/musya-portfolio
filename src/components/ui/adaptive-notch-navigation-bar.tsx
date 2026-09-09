@@ -300,7 +300,7 @@ function NotchDropdownItem({
       disabled={item.disabled}
       onClick={handleClick}
       className={cn(
-        "flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-xl px-3 py-2 text-left text-sm outline-none transition-colors select-none",
+        "flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-full px-3.5 py-2 text-left text-sm outline-none transition-colors select-none",
         "focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-500",
         isSelected
           ? "bg-zinc-800 font-semibold text-zinc-50 dark:bg-zinc-300 dark:text-zinc-950"
