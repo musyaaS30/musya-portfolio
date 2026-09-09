@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Resumepage from './pages/Resumepage'
 import PortfolioPage from './pages/PortfolioPage'
+import ContactPage from './pages/ContactPage'
 import LiquidBackground from './components/ui/LiquidBackground'
 import './styles/main.css'
 import './styles/skillsIcon.css'
@@ -33,6 +34,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/resume" element={<Resumepage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         
         {/* Catch all undefined routes - Show 404 */}
         <Route path="*" element={<NotFound />} />

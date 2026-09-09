@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { LayoutGroup, motion } from "framer-motion";
 import {
   Home,
@@ -27,7 +28,7 @@ const NAV_ITEMS = [
   { id: "resume", label: "Resume", href: "/resume", icon: FileText },
   { id: "portfolio", label: "Portfolio", href: "#portfolio", icon: Briefcase },
   { id: "services", label: "Services", href: "#services", icon: Layers },
-  { id: "contact", label: "Contact", href: "#contact", icon: Mail },
+  { id: "contact", label: "Contact", href: "/contact", icon: Mail },
 ];
 
 const Header = () => {
@@ -37,6 +38,7 @@ const Header = () => {
   const currentRouteId = useMemo(() => {
     if (location.pathname === "/resume") return "resume";
     if (location.pathname === "/portfolio") return "portfolio";
+    if (location.pathname === "/contact") return "contact";
     if (location.hash) {
       const hashId = location.hash.replace("#", "");
       if (NAV_ITEMS.some((item) => item.id === hashId)) return hashId;
@@ -49,7 +51,11 @@ const Header = () => {
 
   // Sync with route navigation and scroll spy
   useEffect(() => {
-    if (location.pathname === "/resume" || location.pathname === "/portfolio") {
+    if (
+      location.pathname === "/resume" ||
+      location.pathname === "/portfolio" ||
+      location.pathname === "/contact"
+    ) {
       return;
     }
 
@@ -79,6 +85,8 @@ const Header = () => {
       ? "resume"
       : location.pathname === "/portfolio"
       ? "portfolio"
+      : location.pathname === "/contact"
+      ? "contact"
       : activeId;
 
   const handleSelectNav = useCallback(

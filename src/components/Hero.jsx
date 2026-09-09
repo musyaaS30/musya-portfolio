@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { MapPin, Clock, ArrowUpRight } from "lucide-react";
 
 const Hero = () => {
@@ -61,13 +62,7 @@ const Hero = () => {
     }
   };
 
-  const handleGetInTouch = (e) => {
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      e.preventDefault();
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+
 
   return (
     <section
@@ -233,14 +228,13 @@ const Hero = () => {
             </span>
 
             {/* Action CTA */}
-            <a
-              href="mailto:mussforrttk@gmail.com"
-              onClick={handleGetInTouch}
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-1.5 !text-black hover:opacity-70 transition-opacity group !no-underline font-bold cursor-pointer"
             >
               <span>GET IN TOUCH</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2] text-black" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ const Home = () => {
         {/* <Testimonials /> */}
         {/* <Services /> */}
         <FAQ />
-        {/* <Contact /> */}
+        {/* <Contact />  */}
       </main>
       <Footer />
       <ScrollTop />

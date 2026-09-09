@@ -944,3 +944,74 @@ body,
     inset -2px 0 6px rgba(255, 210, 230, 0.4);
 }
 
+/* ==========================================================================
+   Contact Liquid Glass Card & Floating Spheres
+   ========================================================================== */
+
+@keyframes float-ball-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-28px, -24px) scale(1.07);
+  }
+  66% {
+    transform: translate(24px, 18px) scale(0.95);
+  }
+}
+
+@keyframes float-ball-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(28px, 26px) scale(0.94);
+  }
+  66% {
+    transform: translate(-22px, -22px) scale(1.06);
+  }
+}
+
+.animate-sphere-red {
+  animation: float-ball-1 9s ease-in-out infinite;
+}
+
+.animate-sphere-blue {
+  animation: float-ball-2 11s ease-in-out infinite;
+}
+
+.contact-glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 
+    0 30px 60px -15px rgba(0, 0, 0, 0.12),
+    0 10px 25px -10px rgba(0, 0, 0, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.dark-mode .contact-glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 30px 60px -15px rgba(0, 0, 0, 0.45),
+    0 10px 25px -10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.sphere-red-gradient {
+  background: radial-gradient(circle at 35% 35%, #ff5238 0%, #ff1744 55%, #b7001c 100%);
+  box-shadow: 0 20px 45px rgba(255, 23, 68, 0.35);
+}
+
+.sphere-blue-gradient {
+  background: radial-gradient(circle at 35% 35%, #448aff 0%, #2979ff 55%, #1565c0 100%);
+  box-shadow: 0 20px 45px rgba(41, 121, 255, 0.35);
+}
+
+

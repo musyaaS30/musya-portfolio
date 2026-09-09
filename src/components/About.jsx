@@ -179,7 +179,7 @@ const About = () => {
               <img
                 src="/assets/img/ilustration/cartoon.png"
                 alt="Musyahadat"
-                className="img-fluid max-w-[380px] sm:max-w-[420px] object-contain drop-shadow-md"
+                className="img-fluid max-w-[380px] sm:max-w-[420px] object-contain"
                 onError={(e) => {
                   if (!e.target.dataset.fallback) {
                     e.target.dataset.fallback = "true";
@@ -252,10 +252,11 @@ const About = () => {
             visibleSections.quote ? "visible" : ""
           }`}
         >
-          <p>
+          {/* <p>
             "Building clean and meaningful experiences through thoughtful code
             and quiet design."
-          </p>
+          </p> */}
+          <p>“I have no special talent. I am only passionately curious.” — Albert Einstein</p>
         </blockquote>
 
         {/* Fun Facts - Section 7 */}
