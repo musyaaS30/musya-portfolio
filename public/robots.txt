@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bymusyaa.my.id/sitemap.xml
+Sitemap: https://www.bymusyaa.my.id/sitemap.xml
