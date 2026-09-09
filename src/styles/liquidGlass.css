@@ -1014,4 +1014,33 @@ body,
   box-shadow: 0 20px 45px rgba(41, 121, 255, 0.35);
 }
 
+.contact-glass-card a,
+.contact-glass-card a:link,
+.contact-glass-card a:visited,
+.contact-glass-card a:active {
+  color: #6b7280 !important;
+  text-decoration: none !important;
+}
+
+.contact-glass-card a:hover {
+  color: #111827 !important;
+  text-decoration: none !important;
+}
+
+.dark-mode .contact-glass-card a,
+.dark-mode .contact-glass-card a:link,
+.dark-mode .contact-glass-card a:visited {
+  color: #9ca3af !important;
+}
+
+.dark-mode .contact-glass-card a:hover {
+  color: #ffffff !important;
+}
+
+.contact-glass-card a svg {
+  fill: currentColor !important;
+  color: inherit !important;
+}
+
+
 
