@@ -142,26 +142,26 @@ const ContactPage = () => {
         </section>
 
         {/* Liquid Glass Showcase Section */}
-        <section className="relative py-10 sm:py-16 px-4 flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[580px] sm:min-h-[680px] md:min-h-[760px] py-20 sm:py-28 md:py-36 px-4 flex items-center justify-center">
           {/* Card & Spheres Stage Container */}
           <div
-            className="relative flex items-center justify-center select-none"
+            className="relative flex items-center justify-center select-none my-auto"
             style={{ perspective: "1200px" }}
             data-aos="zoom-in"
             data-aos-delay="100"
           >
             {/* 1. Bola Merah-Oranye (Kiri Atas) yang Bergerak */}
             <div
-              className="absolute -top-12 -left-10 sm:-top-16 sm:-left-16 md:-top-20 md:-left-20 
-                         w-36 h-36 sm:w-52 sm:h-52 md:w-60 md:h-60 
+              className="absolute -top-10 -left-8 sm:-top-14 sm:-left-12 md:-top-16 md:-left-16 
+                         w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 
                          rounded-full sphere-red-gradient animate-sphere-red pointer-events-none z-0"
               aria-hidden="true"
             />
 
             {/* 2. Bola Biru Royal (Kanan Bawah) yang Bergerak */}
             <div
-              className="absolute -bottom-12 -right-10 sm:-bottom-16 sm:-right-16 md:-bottom-20 md:-right-20 
-                         w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 
+              className="absolute -bottom-10 -right-8 sm:-bottom-14 sm:-right-12 md:-bottom-16 md:-right-16 
+                         w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60 
                          rounded-full sphere-blue-gradient animate-sphere-blue pointer-events-none z-0"
               aria-hidden="true"
             />
@@ -174,12 +174,12 @@ const ContactPage = () => {
               className="contact-glass-card relative z-10 
                          w-[320px] sm:w-[460px] md:w-[530px] lg:w-[560px] 
                          aspect-[1.58/1] rounded-[28px] sm:rounded-[36px] overflow-hidden 
-                         p-5 sm:p-8 flex flex-col justify-between
+                         p-6 sm:p-9 flex flex-col justify-between
                          transition-transform duration-200 ease-out cursor-pointer"
             >
               {/* Watermark Garis Geometris Melengkung (Khas Kartu Referensi) */}
               <svg
-                className="absolute inset-0 w-full h-full pointer-events-none opacity-25 dark:opacity-15 text-white stroke-current"
+                className="absolute inset-0 w-full h-full pointer-events-none opacity-30 dark:opacity-15 text-white stroke-current"
                 viewBox="0 0 500 316"
                 fill="none"
                 strokeWidth="12"
@@ -201,13 +201,13 @@ const ContactPage = () => {
 
               {/* Baris Atas: Contactless NFC Wave & Direct Status */}
               <div className="relative z-10 flex items-center justify-between">
-                <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase text-neutral-600 dark:text-neutral-300 font-mono">
+                <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase text-neutral-700 dark:text-neutral-200 font-mono">
                   CONTACT PASSPORT
                 </span>
 
                 {/* NFC Wave Symbol */}
                 <div
-                  className="flex items-center text-neutral-700 dark:text-neutral-200 opacity-80"
+                  className="flex items-center text-neutral-700 dark:text-neutral-200 opacity-90"
                   title="Contactless Signal"
                 >
                   <svg
@@ -215,7 +215,7 @@ const ContactPage = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2.4"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                   >
                     <path d="M8.5 16.5a5 5 0 0 1 0-9" />
@@ -227,7 +227,7 @@ const ContactPage = () => {
 
               {/* Baris Tengah: Icon-icon (Gmail, Facebook, LinkedIn, Instagram, GitHub) */}
               <div className="relative z-10 my-auto py-2">
-                <div className="flex items-center justify-center gap-2.5 sm:gap-4 md:gap-5 flex-wrap">
+                <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 flex-wrap">
                   {socialLinks.map((item, idx) => (
                     <a
                       key={idx}
@@ -235,10 +235,10 @@ const ContactPage = () => {
                       target={item.name === "Gmail" ? "_self" : "_blank"}
                       rel="noopener noreferrer"
                       className={`group/icon relative p-2.5 sm:p-3.5 rounded-2xl sm:rounded-3xl 
-                                  bg-white/40 dark:bg-white/10 backdrop-blur-md 
-                                  border border-white/80 dark:border-white/20
-                                  shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)] 
-                                  text-neutral-700 dark:text-neutral-200
+                                  bg-white/50 dark:bg-white/10 backdrop-blur-md 
+                                  border border-white/90 dark:border-white/20
+                                  shadow-[0_8px_18px_-4px_rgba(0,0,0,0.12)] 
+                                  text-neutral-800 dark:text-neutral-100
                                   ${item.color}
                                   transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-1`}
                       title={item.name}
@@ -259,17 +259,17 @@ const ContactPage = () => {
               {/* Baris Bawah: Info Pemilik & Tulisan "Musya" (Pengganti VISA) */}
               <div className="relative z-10 flex items-end justify-between">
                 <div>
-                  <span className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400 font-semibold block">
+                  <span className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-neutral-600 dark:text-neutral-400 font-bold block">
                     CARDHOLDER
                   </span>
-                  <span className="text-xs sm:text-sm md:text-base font-bold text-neutral-800 dark:text-neutral-100 tracking-wider font-mono">
+                  <span className="text-xs sm:text-sm md:text-base font-black text-neutral-900 dark:text-neutral-100 tracking-wider font-mono">
                     MUSYAHADAT
                   </span>
                 </div>
 
                 {/* Tulisan Musya pengganti logo VISA */}
                 <div className="text-right select-none">
-                  <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold italic tracking-wider text-neutral-800 dark:text-neutral-100 font-sans drop-shadow-sm">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-wider text-neutral-900 dark:text-neutral-100 font-sans drop-shadow-sm">
                     Musya
                   </span>
                 </div>

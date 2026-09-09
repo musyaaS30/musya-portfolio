@@ -953,10 +953,10 @@ body,
     transform: translate(0px, 0px) scale(1);
   }
   33% {
-    transform: translate(-28px, -24px) scale(1.07);
+    transform: translate(-16px, -14px) scale(1.04);
   }
   66% {
-    transform: translate(24px, 18px) scale(0.95);
+    transform: translate(14px, 12px) scale(0.97);
   }
 }
 
@@ -965,10 +965,10 @@ body,
     transform: translate(0px, 0px) scale(1);
   }
   33% {
-    transform: translate(28px, 26px) scale(0.94);
+    transform: translate(16px, 15px) scale(0.96);
   }
   66% {
-    transform: translate(-22px, -22px) scale(1.06);
+    transform: translate(-14px, -12px) scale(1.04);
   }
 }
 
