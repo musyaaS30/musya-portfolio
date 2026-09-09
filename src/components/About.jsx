@@ -122,9 +122,27 @@ const About = () => {
 
       <div className="container">
         {/* Intro */}
-        <div className="row justify-content-center intro-wrap gy-5">
-          <div className="col-lg-9 col-xl-8">
-            <div className="intro-content text-center">
+        <div className="row align-items-center intro-wrap gy-5">
+          {/* Foto di Kiri */}
+          <div className="col-lg-5" data-aos="fade-right">
+            <figure className="profile-figure text-center text-lg-start">
+              <img
+                src="/assets/img/profile/profile.jpg"
+                alt="Musyahadat"
+                className="img-fluid profile-photo"
+                onError={(e) => {
+                  if (!e.target.dataset.fallback) {
+                    e.target.dataset.fallback = "true";
+                    e.target.src = "/assets/img/profile/profile2.jpg";
+                  }
+                }}
+              />
+            </figure>
+          </div>
+
+          {/* Teks di Kanan Foto */}
+          <div className="col-lg-7" data-aos="fade-left">
+            <div className="intro-content text-center text-lg-start">
               {/* Headline - Section 1 */}
               <h2
                 ref={headlineRef}
@@ -154,7 +172,7 @@ const About = () => {
               <div
                 ref={ctaRef}
                 data-section="cta"
-                className={`cta-group text-step justify-content-center ${
+                className={`cta-group text-step justify-content-center justify-content-lg-start ${
                   visibleSections.cta ? "visible" : ""
                 }`}
               >
