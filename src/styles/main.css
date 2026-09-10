@@ -60,7 +60,6 @@
 
 /* Smooth scroll & Frame Wrapping */
 html {
-  scroll-behavior: smooth;
   background-color: #090d16;
   min-height: 100%;
 }

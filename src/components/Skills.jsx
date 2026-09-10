@@ -75,7 +75,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="skills section relative overflow-hidden py-16">
+    <section id="services" className="skills section relative overflow-hidden py-16">
       <TechMarquee />
 
       <div className="container relative z-10 mt-12 px-4 mx-auto max-w-7xl" data-aos="fade-up" data-aos-delay="100">

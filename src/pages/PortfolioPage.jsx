@@ -1,20 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
 import Portfolio from "../components/Portfolio";
 import Footer from "../components/Footer";
 import ScrollTop from "../components/ScrollTop";
 import CustomCursor from "../components/CustomCursor";
 
 const PortfolioPage = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, []);
-
   return (
     <div className="portfolio-page min-h-screen flex flex-col bg-[var(--background-color)] text-[var(--default-color)]">
       <CustomCursor />
-      <Header />
 
       <main className="main flex-grow pt-24 pb-16">
         {/* Page Hero Header */}

@@ -61,6 +61,7 @@ const FileUi = ({
 
     if (navigateTo) {
       setTimeout(() => {
+        window.scrollTo(0, 0);
         navigate(navigateTo);
       }, delay);
     }
@@ -72,7 +73,8 @@ const FileUi = ({
       handleCardClick(e);
     } else {
       if (navigateTo) {
-        navigate(navigateTo);0, 255, 157, 0.4
+        window.scrollTo(0, 0);
+        navigate(navigateTo);
       }
     }
   };

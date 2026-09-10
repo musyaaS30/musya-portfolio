@@ -239,6 +239,8 @@ export const NotchItem = forwardRef<HTMLButtonElement, NotchItemProps>(
         {isActive && (
           <motion.span
             layoutId="notch-active-pill"
+            layout="position"
+            transformTemplate={({ x }) => `translateX(${x || 0})`}
             className="absolute inset-0 rounded-full bg-zinc-800"
             transition={{
               type: "spring",

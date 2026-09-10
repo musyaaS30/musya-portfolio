@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Header from '../components/Header'
 import Hero from '../components/Hero'
 import About from '../components/About'
 import Skills from '../components/Skills'
@@ -29,7 +28,6 @@ const Home = () => {
   return (
     <div className="index-page">
       <CustomCursor />
-      <Header />
       <main className="main">
         <Hero />
         <About />

@@ -25,9 +25,9 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { id: "home", label: "Home", href: "/home", icon: Home },
   { id: "about", label: "About", href: "#about", icon: User },
+  { id: "services", label: "Services", href: "#services", icon: Layers },
   { id: "resume", label: "Resume", href: "/resume", icon: FileText },
   { id: "portfolio", label: "Portfolio", href: "#portfolio", icon: Briefcase },
-  { id: "services", label: "Services", href: "#services", icon: Layers },
   { id: "contact", label: "Contact", href: "/contact", icon: Mail },
 ];
 
@@ -72,11 +72,12 @@ const Header = () => {
 
     if (iconState !== targetState) {
       // Navbar drop animation takes 0.65s (ease [0.16, 1, 0.3, 1]).
-      // Trigger the morph at 650ms, right after the navbar completely settles!
+      // Trigger the morph at 650ms on initial entry, or quickly (80ms) on page route changes.
+      const delay = lastRoutePath ? 80 : 650;
       const timer = setTimeout(() => {
         setIconState(targetState);
         lastRoutePath = location.pathname;
-      }, 650);
+      }, delay);
 
       return () => clearTimeout(timer);
     } else {
@@ -86,6 +87,11 @@ const Header = () => {
 
   const [activeId, setActiveId] = useState(currentRouteId);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Sync activeId when currentRouteId changes
+  useEffect(() => {
+    setActiveId(currentRouteId);
+  }, [currentRouteId]);
 
   // Sync with route navigation and scroll spy
   useEffect(() => {
@@ -182,12 +188,19 @@ const Header = () => {
     [effectiveActiveId]
   );
 
+  // Hide Header on 404 page
+  const knownRoutes = ["/", "/home", "/resume", "/portfolio", "/contact"];
+  if (!knownRoutes.includes(location.pathname)) {
+    return null;
+  }
+
   return (
     <>
       {/* ========================================================================= */}
       {/* 1. DESKTOP VIEW (>= 1280px / xl): SLEEK OBSIDIAN NOTCH SYSTEM             */}
       {/* ========================================================================= */}
       <motion.div
+        layoutRoot
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
@@ -231,13 +244,18 @@ const Header = () => {
                 {iconState === "home" ? (
                   <motion.div
                     key="desktop-home-icon"
-                    initial={{ opacity: 0, scale: 0.35, rotate: -70, filter: "blur(4px)" }}
+                    initial={{ opacity: 0, scale: 0.6, rotate: -25, filter: "blur(6px)" }}
                     animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.35, rotate: 70, filter: "blur(4px)" }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, scale: 0.6, rotate: 25, filter: "blur(6px)" }}
+                    transition={{
+                      type: "spring",
+                      damping: 24,
+                      stiffness: 70,
+                      mass: 0.9,
+                    }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
-                    <Home className="size-5.5 text-white stroke-[2.2] transition-transform duration-200 group-hover:scale-110" />
+                    <Home className="size-5.5 text-white stroke-[2.2] transition-transform duration-300 ease-out group-hover:scale-110" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -245,7 +263,12 @@ const Header = () => {
                     initial={{ opacity: 0, scale: 0.35, rotate: 70, filter: "blur(4px)" }}
                     animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
                     exit={{ opacity: 0, scale: 0.35, rotate: -70, filter: "blur(4px)" }}
-                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      type: "spring",
+                      damping: 24,
+                      stiffness: 70,
+                      mass: 0.9,
+                    }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
                     <img
@@ -364,6 +387,7 @@ const Header = () => {
       {/* 2. TABLET & MOBILE VIEW (< 1280px): COMPACT SLEEK DARK NOTCH ISLAND       */}
       {/* ========================================================================= */}
       <motion.div
+        layoutRoot
         initial={{ y: -60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}

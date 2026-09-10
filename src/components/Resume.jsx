@@ -29,7 +29,7 @@ const Resume = () => {
       delay: 500,
     },
     {
-      title: "Participant & 2nd Place Winner",
+      title: "Participant & 3nd Place Winner",
       company: "LKS 2025 IT Software for Business",
       period: "Mei 2025",
       description:
