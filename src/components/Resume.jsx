@@ -75,15 +75,32 @@ const Resume = () => {
 
   const skillsData = [
     {
-      category: "Technical Skills",
+      category: "Frontend Development",
       tags: [
-        "Frontend Development",
-        "HTML, CSS, Tailwind CSS",
-        "JavaScript",
         "React.js",
-        "UI/UX Design",
+        "JavaScript",
+        "Tailwind CSS",
+        "HTML5",
+        "CSS3",
+        "TanStack Query",
       ],
       delay: 400,
+    },
+    {
+      category: "Backend & Database",
+      tags: [
+        "Node.js",
+        "NestJS",
+        "Firebase",
+        "MySQL",
+        "Redis",
+      ],
+      delay: 450,
+    },
+    {
+      category: "Cloud, DevOps & AI",
+      tags: ["Cloudflare", "GitHub", "Claude AI"],
+      delay: 500,
     },
     {
       category: "Leadership",
@@ -93,12 +110,7 @@ const Resume = () => {
         "Communication Skills",
         "Collaboration",
       ],
-      delay: 450,
-    },
-    {
-      category: "Tools & Platforms",
-      tags: ["Figma", "Visual Studio Code", "Git & GitHub", "Vite", "AI Tools"],
-      delay: 500,
+      delay: 550,
     },
   ];
 
@@ -184,6 +196,18 @@ const Resume = () => {
                     </div>
                   </div>
                 ))}
+
+                {/* Additional experiences indicator */}
+                <div
+                  className="flex justify-center pt-8 pb-2"
+                  data-aos="fade-up"
+                  data-aos-delay="600"
+                >
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-200 bg-zinc-950 border border-[var(--liquid-glass-border)] backdrop-blur-md shadow-xs">
+                    <span className="size-1.5 rounded-full bg-[var(--accent-color,#00d084)] animate-pulse" />
+                    <span>And many more projects & experiences...</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
