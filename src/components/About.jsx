@@ -163,7 +163,7 @@ const About = () => {
                   View My Work <i className="bi bi-arrow-down ms-1"></i>
                 </a>
                 <a
-                  href="/assets/cv/CV-Musyahadat.d5b6fc64ef903fc5a2a596809e6850c7.pdf"
+                  href="/assets/cv/MUSYAHADAT-CURRICULUM VITAE 2026.pdf"
                   download
                   className="btn btn-ghost"
                 >

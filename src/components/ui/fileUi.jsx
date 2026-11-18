@@ -7,6 +7,7 @@ const FileUi = ({
   delay = 3500,
   onOpen,
   className = '',
+  hintText = 'Click to open!', // Bisa diubah lewat props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -88,6 +89,34 @@ const FileUi = ({
         tabIndex={0}
         aria-label="Interactive portfolio project folder"
       >
+        {/* ARAHAN / HINT TEXT & PANAH MELENGKUNG */}
+        <div className="click-hint" aria-hidden="true">
+          <span className="hint-text">{hintText}</span>
+          <svg
+            className="hint-arrow"
+            viewBox="0 0 110 95"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Garis melengkung */}
+            <path
+              d="M5 12 C 65 8, 105 28, 72 82"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Ujung panah */}
+            <path
+              d="M77 63 L 70 84 L 91 79"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+
         <input
           type="checkbox"
           className="folder-toggle"
@@ -110,21 +139,14 @@ const FileUi = ({
               onClick={handleFileClick}
               style={{ transitionDelay: card.delay }}
             >
-              {/* Actual Project Mockup Image */}
               <img 
                 src={card.image} 
                 alt={card.title} 
                 className="file-img"
                 loading="lazy" 
               />
-              
-              {/* Gradient overlay for readability */}
               <div className="file-overlay" />
-              
-              {/* Shine sweep effect */}
               <div className="shine" />
-              
-              {/* Project Title and Tech Tag */}
               <div className="file-info">
                 <div className="file-text">{card.title}</div>
               </div>
@@ -150,6 +172,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
+  padding-top: 55px; /* Ruang tambahan untuk teks & panah di atas */
 
   .folder-card {
     width: 240px;
@@ -167,6 +190,57 @@ const StyledWrapper = styled.div`
 
   .folder-card:hover {
     transform: scale(1.05);
+  }
+
+  /* ------------------------------------------------------------- */
+  /* CLICK HINT (TEKS MIRING & PANAH MELENGKUNG)                   */
+  /* ------------------------------------------------------------- */
+  .click-hint {
+    position: absolute;
+    top: -52px;
+    right: -65px;
+    display: flex;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 100;
+    /* Ubah warna ini sesuai tema background web kamu (misal #ffffff untuk dark mode atau #111827 untuk light mode) */
+    color: var(--hint-color, #currentColor);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    animation: floatHint 2.5s ease-in-out infinite;
+  }
+
+  .hint-text {
+    // font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transform: rotate(-14deg);
+    margin-right: -8px;
+    margin-top: -6px;
+    white-space: nowrap;
+  }
+
+  .hint-arrow {
+    width: 85px;
+    height: 75px;
+    overflow: visible;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  }
+
+  /* Hilangkan arahan ketika folder sudah terbuka */
+  .folder-card.is-open .click-hint {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+    animation: none;
+  }
+
+  @keyframes floatHint {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
   }
 
   .folder-toggle {
@@ -351,72 +425,24 @@ const StyledWrapper = styled.div`
     transform: scale(1.08);
   }
 
-  /* Status badge & Countdown bar */
-  .status-container {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .status-badge {
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 500;
-    background: rgba(24, 24, 27, 0.85);
-    border: 1px solid rgba(63, 63, 70, 0.6);
-    backdrop-filter: blur(8px);
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  }
-
-  .status-badge.before-open {
-    flex-direction: row;
-    gap: 8px;
-    color: #a1a1aa;
-  }
-
-  .pulse-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent-color, #00d084);
-    animation: pulseDot 1.5s infinite;
-  }
-
-  @keyframes pulseDot {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  .progress-bar-track {
-    width: 100%;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: var(--accent-color, #00d084);
-    border-radius: 999px;
-    animation: fillProgress linear forwards;
-  }
-
-  @keyframes fillProgress {
-    from { width: 0%; }
-    to { width: 100%; }
-  }
-
   @media (max-width: 576px) {
     .folder-card {
       width: 200px;
       height: 155px;
+    }
+
+    .click-hint {
+      top: -45px;
+      right: -45px;
+    }
+
+    .hint-text {
+      font-size: 14px;
+    }
+
+    .hint-arrow {
+      width: 68px;
+      height: 60px;
     }
   }
 `;

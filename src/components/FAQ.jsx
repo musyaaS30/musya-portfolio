@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus, Minus, HelpCircle } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 
 const FAQ_ITEMS = [
   {
@@ -37,7 +37,39 @@ const FAQ_ITEMS = [
   },
 ];
 
-const MotionDiv = motion.div;
+// Varian animasi Squash & Stretch untuk gelembung jawaban
+const answerBubbleVariants = {
+  hidden: {
+    opacity: 0,
+    y: -14,
+    scaleX: 0.85,
+    scaleY: 1.18, // Stretch vertikal saat mulai muncul
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    // Keyframes: Stretch -> Squash -> Normal
+    scaleX: [0.85, 1.07, 0.98, 1],
+    scaleY: [1.18, 0.91, 1.02, 1],
+    transition: {
+      duration: 0.42,
+      times: [0, 0.45, 0.78, 1],
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    // Sedikit squash lalu menyusut saat menghilang
+    scaleX: [1, 1.05, 0.88],
+    scaleY: [1, 0.92, 1.1],
+    transition: {
+      duration: 0.24,
+      times: [0, 0.35, 1],
+      ease: "easeIn",
+    },
+  },
+};
 
 const FAQ = () => {
   const [activeId, setActiveId] = useState("scratch");
@@ -68,47 +100,75 @@ const FAQ = () => {
               <div key={item.id} className="flex flex-col items-start w-full">
                 {/* Question Pill + Outside Action Icon Row */}
                 <div className="inline-flex items-center gap-3">
-                  <button
+                  <motion.button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => toggleFaq(item.id)}
-                    className="inline-flex items-center w-fit px-6 sm:px-7 py-3.5 sm:py-4 !rounded-full text-sm sm:text-base font-semibold text-neutral-100 bg-neutral-900/95 dark:bg-neutral-800/95 hover:bg-neutral-800 dark:hover:bg-neutral-700/90 transition-all duration-200 cursor-pointer text-left shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-blue-400 border-0"
+                    // Squash & Stretch interaktif pada tombol pill
+                    whileHover={{
+                      scaleX: 1.03,
+                      scaleY: 0.96,
+                    }}
+                    whileTap={{
+                      scaleX: 1.08,
+                      scaleY: 0.88,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 18,
+                      mass: 0.8,
+                    }}
+                    className="inline-flex items-center w-fit px-6 sm:px-7 py-3.5 sm:py-4 !rounded-full text-sm sm:text-base font-semibold text-neutral-100 bg-neutral-900/95 dark:bg-neutral-800/95 hover:bg-neutral-800 dark:hover:bg-neutral-700/90 transition-colors duration-200 cursor-pointer text-left shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-blue-400 border-0 origin-center"
                     style={{ borderRadius: "9999px" }}
                   >
                     <span>{item.question}</span>
-                  </button>
+                  </motion.button>
 
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => toggleFaq(item.id)}
                     aria-label={isOpen ? "Close answer" : "Open answer"}
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scaleX: 1.25, scaleY: 0.75 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     className="flex size-8 sm:size-9 shrink-0 items-center justify-center !rounded-full text-neutral-400 hover:text-neutral-200 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors cursor-pointer outline-none border-0 bg-transparent"
                     style={{ borderRadius: "9999px" }}
                   >
-                    {isOpen ? (
-                      <Minus className="size-5 transition-transform duration-200" />
-                    ) : (
-                      <Plus className="size-5 transition-transform duration-200" />
-                    )}
-                  </button>
+                    <motion.span
+                      key={isOpen ? "minus" : "plus"}
+                      initial={{ rotate: -90, scale: 0.6 }}
+                      animate={{ rotate: 0, scale: 1 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 18 }}
+                    >
+                      {isOpen ? (
+                        <Minus className="size-5" />
+                      ) : (
+                        <Plus className="size-5" />
+                      )}
+                    </motion.span>
+                  </motion.button>
                 </div>
 
-                {/* Offset Chat-Style Answer Bubble */}
+                {/* Offset Chat-Style Answer Bubble dengan Squash & Stretch */}
                 <AnimatePresence mode="wait">
                   {isOpen && (
-                    <MotionDiv
+                    <motion.div
                       key={`answer-${item.id}`}
-                      initial={{ opacity: 0, y: -8, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -6, scale: 0.98 }}
-                      transition={{ duration: 0.22, ease: "easeOut" }}
-                      className="mt-3 ml-6 sm:ml-12 md:ml-16 max-w-md sm:max-w-lg p-5 sm:p-6 !rounded-3xl  bg-[#07ffa4] text-neutral-950 shadow-md border-0"
-                      style={{ borderRadius: "28px" }}
+                      variants={answerBubbleVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      style={{
+                        borderRadius: "28px",
+                        transformOrigin: "top left",
+                      }}
+                      className="mt-3 ml-6 sm:ml-12 md:ml-16 max-w-md sm:max-w-lg p-5 sm:p-6 !rounded-3xl bg-[#07ffa4] text-neutral-950 shadow-md border-0"
                     >
                       <p className="text-sm sm:text-base font-medium leading-relaxed m-0 text-slate-950">
                         {item.answer}
                       </p>
-                    </MotionDiv>
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>

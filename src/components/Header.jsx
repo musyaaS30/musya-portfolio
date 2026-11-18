@@ -11,7 +11,6 @@ import {
   Mail,
   ChevronDown,
   Check,
-  Sparkles,
 } from "lucide-react";
 import {
   NotchLeftWing,
@@ -423,38 +422,58 @@ const Header = () => {
               }}
               title={iconState === "home" ? "Back to Home" : "Musyahadat"}
               aria-label={iconState === "home" ? "Back to Home" : "Musyahadat Home"}
-              className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white no-underline group"
+              className="group relative flex items-center gap-2 text-xs sm:text-sm font-bold text-white no-underline hover:no-underline"
             >
-              <div
-                className={cn(
-                  "relative flex size-5.5 items-center justify-center rounded-md transition-colors duration-400 overflow-hidden",
-                  iconState === "home"
-                    ? "bg-white/15 text-white group-hover:bg-white/25"
-                    : "bg-[var(--accent-color)] text-black"
-                )}
-              >
+              <div className="relative flex size-6 sm:size-7 items-center justify-center text-white">
+                {/* Ambient light ripple on state transition */}
+                <AnimatePresence>
+                  <motion.span
+                    key={iconState === "home" ? "mobile-glow-home" : "mobile-glow-logo"}
+                    initial={{ opacity: 0.65, scale: 0.6 }}
+                    animate={{ opacity: 0, scale: 1.7 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="pointer-events-none absolute inset-0 rounded-full bg-white/25 blur-[6px]"
+                  />
+                </AnimatePresence>
+
+                {/* Seamless morph animation between Logo and Home Icon */}
                 <AnimatePresence initial={false}>
                   {iconState === "home" ? (
                     <motion.div
-                      key="mob-home"
-                      initial={{ opacity: 0, scale: 0.35, rotate: -60 }}
-                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                      exit={{ opacity: 0, scale: 0.35, rotate: 60 }}
-                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      key="mobile-home-icon"
+                      initial={{ opacity: 0, scale: 0.6, rotate: -25, filter: "blur(6px)" }}
+                      animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, scale: 0.6, rotate: 25, filter: "blur(6px)" }}
+                      transition={{
+                        type: "spring",
+                        damping: 24,
+                        stiffness: 70,
+                        mass: 0.9,
+                      }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <Home className="size-3.5 text-white stroke-[2.2]" />
+                      <Home className="size-4.5 sm:size-5.5 text-white stroke-[2.2] transition-transform duration-300 ease-out group-hover:scale-110" />
                     </motion.div>
                   ) : (
                     <motion.div
-                      key="mob-sparkles"
-                      initial={{ opacity: 0, scale: 0.35, rotate: 60 }}
-                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                      exit={{ opacity: 0, scale: 0.35, rotate: -60 }}
-                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      key="mobile-musya-logo"
+                      initial={{ opacity: 0, scale: 0.35, rotate: 70, filter: "blur(4px)" }}
+                      animate={{ opacity: 1, scale: 1, rotate: 0, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, scale: 0.35, rotate: -70, filter: "blur(4px)" }}
+                      transition={{
+                        type: "spring",
+                        damping: 24,
+                        stiffness: 70,
+                        mass: 0.9,
+                      }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <Sparkles className="size-3" />
+                      <img
+                        src="/musyaLogo.png"
+                        alt="Musyahadat"
+                        className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-105"
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>
