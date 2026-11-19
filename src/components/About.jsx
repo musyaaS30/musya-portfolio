@@ -59,7 +59,7 @@ const About = () => {
     },
     {
       icon: "bi-headphones",
-      text: "Lo-fi Beats",
+      text: "Indie Pop",
       delay: 160,
     },
     {
